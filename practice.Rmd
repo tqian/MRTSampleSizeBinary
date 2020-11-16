@@ -5,3 +5,5 @@ date: "11/15/2020"
 output: html_document
 ---
 Practice
+
+This is a practice project for our project with professor Tianchen Qian. The project envolves a sample size calculator for micro- randomized trials in mobile health. 
