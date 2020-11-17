@@ -6,4 +6,4 @@ output: html_document
 ---
 Practice
 
-This is a practice project for our project with professor Tianchen Qian. The project envolves a sample size calculator for micro- randomized trials in mobile health. 
+This is a practice file for our project with professor Tianchen Qian. The project involves a sample size calculator for micro- randomized trials in mobile health. 
