@@ -288,4 +288,3 @@ compute_alpha_beta_from_prob <- function(p10, pT0, p11, pT1, total_T,
     
     return(list(alpha = alpha, beta = beta, ate = ate))
 }
-
