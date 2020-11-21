@@ -123,5 +123,3 @@ compute_m_sigma <- function(avail_pattern,
     
 }
 
-calculate_bin_samplesize_f()
-
