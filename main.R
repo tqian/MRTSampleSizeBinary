@@ -28,19 +28,10 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     # Set up the function that we will ultimately solve to get the sample size
     power_f <- function(n){
         
-        ## Lambda as a function of x (i.e., the sample size)
-        compute_lambda <- function(x){
-            as.numeric(x * t(beta) %*%
-                           solve(solve(m_matrix) %*%
-                                     sigma_matrix %*%
-                                     t(solve(m_matrix))) %*% 
-                           beta)
-        }
-        
         right_hand_side <- pf(q=qf(p=(1-gamma), df1=p, df2=n-q-p), 
                               df1=p, 
                               df2=n-q-p, 
-                              ncp=compute_lambda(n))
+                              ncp=compute_ncp(n, beta, m_matrix, sigma_matrix))
         left_hand_side <- b
         return(right_hand_side - left_hand_side)
     }
@@ -49,6 +40,19 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     return(sample_size)
 }
 
+# helper function for calculate_mrt_bin_samplesize_f
+# computes the non-centrality parameter for the F distribution when solving for
+# sample size
+compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
+    as.numeric(x * t(beta) %*%
+                   solve(solve(m_matrix) %*%
+                             sigma_matrix %*%
+                             t(solve(m_matrix))) %*% 
+                   beta)
+}
+
+
+# helper function for calculate_mrt_bin_samplesize_f
 ## E[I_t]  # TQ: will assume this is vector of length T
 ## f(t)    # TQ: will assume this f_t object is matrix of dimension T * p
 ## g(t)    # TQ: will assume this g_t object is matrix of dimension T * q
