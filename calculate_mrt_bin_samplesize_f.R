@@ -8,6 +8,7 @@
 ## p_t (randomization probability)
 ## gamma (type I error rate),
 ## b (Type II error rate)
+## exact # returns exact n if true, else returns ceiling of sample size
 calculate_mrt_bin_samplesize_f <- function(avail_pattern,  
                                  f_t,             
                                  g_t,             
@@ -15,7 +16,8 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
                                  alpha,           
                                  p_t,             
                                  gamma,          
-                                 b)               
+                                 b,
+                                 exact=FALSE)               
 {
     
     p <- length(beta)
@@ -36,7 +38,14 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
         return(right_hand_side - left_hand_side)
     }
     
+    # find min n to achieve desired power
     sample_size <- uniroot(power_f, lower=p+q+1, upper=1000000)$root
+    
+    # round up
+    if(exact == FALSE){
+        sample_size <- ceiling(sample_size)
+    }
+    
     return(sample_size)
 }
 
