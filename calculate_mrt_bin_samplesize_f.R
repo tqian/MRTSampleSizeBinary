@@ -41,7 +41,7 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     # find min n to achieve desired power
     sample_size <- uniroot(power_f, lower=p+q+1, upper=1000000)$root
     
-    # round up
+    # round up if non-exact size is requested
     if(exact == FALSE){
         sample_size <- ceiling(sample_size)
     }
