@@ -21,6 +21,16 @@ compute_m_sigma <- function(avail_pattern,
   m_matrix <- matrix(data=0, nrow=length(beta), ncol=length(beta))
   sigma_matrix <- matrix(data=0, nrow=length(beta), ncol=length(beta))
   
+  # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
+  mu0_t <- exp(g_t %*% alpha) 
+  stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
+  
+  # check that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 1) is 0 and 1.
+  mee_t <- f_t %*% beta # MEE(t) for t = 1,...,total_dp
+  # E(Y_{t+1} = 1 | I_t = 1, A_t = 1) for t = 1,...,total_dp
+  mu1_t <- mu0_t * exp(mee_t) 
+  stopifnot(all(mu1_t < 1) & all(mu1_t > 0))
+  
   # For each decision point 
   # (T = total # of decision points is taken as the length of p_t, for now)
   for (i in 1:length(p_t)){
