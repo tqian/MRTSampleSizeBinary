@@ -1,12 +1,21 @@
-
-
-# helper function for calculate_mrt_bin_samplesize_f
-## E[I_t]  # TQ: will assume this is vector of length T
-## f(t)    # TQ: will assume this f_t object is matrix of dimension T * p
-## g(t)    # TQ: will assume this g_t object is matrix of dimension T * q
-## beta_0
-## alpha_0
-## p_t
+#' Computes "M" matrix for the sandwich estimator of variance-covariance matrix.
+#' Primarily a helper function for calculate_mrt_bin_power_f and
+#' calculate_mrt_bin_samplesize_f.
+#'
+#' @param avail_pattern A vector of length T that is the average availability at
+#'   each time point
+#' @param f_t           Defines marginal excursion effect MEE(t) under
+#'   alternative together with beta
+#' @param g_t           Defines success probability null curve together with
+#'   alpha
+#' @param beta          Defines marginal excursion effect MEE(t) under
+#'   alternative together with g_t
+#' @param alpha         Defines success probability null curve together with f_t
+#' @param p_t           Randomization probability at each time point
+#' @return
+#' @export
+#'
+#' @examples
 compute_m_sigma <- function(avail_pattern,  
                             f_t,             
                             g_t,            
