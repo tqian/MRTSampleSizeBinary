@@ -1,9 +1,14 @@
-#' Returns power of a test given a prespecified sample size in the context of a binary MRT.
+#' Returns power of a test given a prespecified sample size in the context of a
+#' binary MRT.
 #'
-#' @param avail_pattern A vector of length T that is the average availability at each time point
-#' @param f_t           Defines marginal excursion effect MEE(t) under alternative together with beta
-#' @param g_t           Defines success probability null curve together with alpha
-#' @param beta          Defines marginal excursion effect MEE(t) under alternative together with g_t
+#' @param avail_pattern A vector of length T that is the average availability at
+#'   each time point
+#' @param f_t           Defines marginal excursion effect MEE(t) under
+#'   alternative together with beta
+#' @param g_t           Defines success probability null curve together with
+#'   alpha
+#' @param beta          Defines marginal excursion effect MEE(t) under
+#'   alternative together with g_t
 #' @param alpha         Defines success probability null curve together with f_t
 #' @param p_t           Randomization probability at each time point
 #' @param gamma         Desired Type I error
