@@ -1,14 +1,19 @@
-# Calculate sample size with given power
-
-## E[I_t]  # TQ: will assume this is vector of length T
-## f(t)    # TQ: will assume this f_t object is matrix of dimension T * p
-## g(t)    # TQ: will assume this g_t object is matrix of dimension T * q
-## beta_0
-## alpha_0
-## p_t (randomization probability)
-## gamma (type I error rate),
-## b (Type II error rate)
-## exact # returns exact n if true, else returns ceiling of sample size
+#' Returns sample size needed to achieve a specified power in the context of a binary MRT.
+#'
+#' @param avail_pattern A vector of length T that is the average availability at each time point
+#' @param f_t           Defines marginal excursion effect MEE(t) under alternative together with beta
+#' @param g_t           Defines success probability null curve together with alpha
+#' @param beta          Defines marginal excursion effect MEE(t) under alternative together with g_t
+#' @param alpha         Defines success probability null curve together with f_t
+#' @param p_t           Randomization probability at each time point
+#' @param gamma         Desired Type I error
+#' @param b             Desired Type II error
+#' @param exact         Determines if exact n or ceiling will be returned
+#'
+#' @return              Power of the test.
+#' @export
+#'
+#' @examples
 calculate_mrt_bin_samplesize_f <- function(avail_pattern,  
                                  f_t,             
                                  g_t,             
