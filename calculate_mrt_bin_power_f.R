@@ -63,6 +63,11 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
     stop("n is too small")
   }
   
+  if(!is.integer(n)){
+    stop("n must be an integer")
+  }
+  
+  
   m_and_sigma <- compute_m_sigma(avail_pattern, f_t, g_t, beta, alpha, p_t)
   m_matrix <- m_and_sigma$m
   sigma_matrix <- m_and_sigma$sigma
