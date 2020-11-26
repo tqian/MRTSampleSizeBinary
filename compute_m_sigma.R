@@ -1,6 +1,6 @@
-#' Computes "M" matrix for the sandwich estimator of variance-covariance matrix.
-#' Primarily a helper function for calculate_mrt_bin_power_f and
-#' calculate_mrt_bin_samplesize_f.
+#' Computes "M" and "Sigma" matrices for the sandwich estimator of
+#' variance-covariance matrix. Primarily a helper function for
+#' calculate_mrt_bin_power_f and calculate_mrt_bin_samplesize_f.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
@@ -12,7 +12,8 @@
 #'   alternative together with g_t
 #' @param alpha         Defines success probability null curve together with f_t
 #' @param p_t           Randomization probability at each time point
-#' @return
+#' @return              List containing two matrices. The first is the M matrix
+#'   and the second is the Sigma matrix.
 #' @export
 #'
 #' @examples
