@@ -34,7 +34,7 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
   m_matrix <- m_and_sigma$m
   sigma_matrix <- m_and_sigma$sigma
   
-  return(pf(q=qf(p=(1-gamma), df1=p, df2=n-q-p), 
+  return(1-pf(q=qf(p=(1-gamma), df1=p, df2=n-q-p), 
      df1=p, 
      df2=n-q-p, 
      ncp=compute_ncp(n, beta, m_matrix, sigma_matrix)))
