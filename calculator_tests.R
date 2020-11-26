@@ -210,6 +210,48 @@ test_that(
 )
 
 
+# compute_ncp tests -------------------------------------------------------
+
+m_s <- compute_m_sigma(tau_t, f_t, g_t, beta, alpha, p_t)
+
+
+test_that(
+  "test dimension checks",
+  {
+    expect_error(
+      compute_ncp(100, beta, diag(0, nrow=4), m_s$sigma),
+      "m_matrix must be nonsingular")
+  }
+)
+
+test_that(
+  "test dimension checks",
+  {
+    expect_error(
+      compute_ncp(100, beta, diag(44), m_s$sigma),
+      "Dimensions of beta and m_matrix do not agree")
+  }
+)
+
+
+test_that(
+  "test dimension checks",
+  {
+    expect_error(
+      compute_ncp(100, beta, m_s$m, diag(4)),
+      "Dimensions of m_matrix and sigma_matrix do not agree")
+  }
+)
+
+test_that(
+  "test dimension checks",
+  {
+    expect_error(
+      compute_ncp(100, beta, m_s$m, diag(0, nrow=3)),
+      "Dimensions of m_matrix and sigma_matrix do not agree")
+  }
+)
+
 # calculate_mrt_bin_power_f tests -----------------------------------------
 
 size1 <- calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta, 
