@@ -29,6 +29,13 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
                                  b,
                                  exact=FALSE)               
 {
+    pts <- length(avail_pattern)
+    
+    dim_vec <- c(dim(f_t)[1], dim(g_t)[1], length(p_t))
+    
+    if(!all(dim_vec == pts)){
+        stop("All arguments must agree on number of time points.")
+    }
     
     if(dim(f_t)[2] > dim(g_t)[2]){
         warning("f should lie in span of g")
@@ -43,11 +50,11 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     }
     
     if(gamma < 0 | gamma > 1) {
-        stop("gamma (type I error) should be between 0 and 1")
+        stop("gamma, type I error, should be between 0 and 1")
     }
     
-    if(b < 0 | b > 1) {
-        stop("b (type II error) should be between 0 and 1")
+    if(b <= 0 | b > 1) {
+        stop("b, type II error, should be between 0 and 1")
     }
     
     if(!(all(avail_pattern <= 1 & avail_pattern > 0))){
