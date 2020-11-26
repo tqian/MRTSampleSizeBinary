@@ -15,7 +15,7 @@
 #' @param b             Desired Type II error
 #' @param exact         Determines if exact n or ceiling will be returned
 #'
-#' @return              Power of the test.
+#' @return              Sample size to achieve desired power.
 #' @export
 #'
 #' @examples
