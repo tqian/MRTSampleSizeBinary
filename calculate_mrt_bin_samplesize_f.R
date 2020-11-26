@@ -30,6 +30,10 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
                                  exact=FALSE)               
 {
     
+    if(dim(f_t)[2] > dim(g_t)[2]){
+        warning("f should lie in span of g")
+    }
+    
     p <- length(beta)
     q <- length(alpha)
     
