@@ -188,8 +188,7 @@ test_that(
       "b, type II error, should be between 0 and 1")
   }
 )
-calculate_mrt_bin_samplesize_f(tau_t, f_new, g_t, beta_new, 
-                              alpha, p_t, gamma, b, TRUE)
+
 
 # compute_m_sigma tests ---------------------------------------------------
 test_that(
@@ -229,7 +228,7 @@ test_that(
 )
 
 test_that(
-  "check TQ's sample",
+  "check TQ's sample at different sample size",
   {
     expect_equal(
       calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
@@ -284,5 +283,70 @@ test_that(
                                 100.5),
       "n must be an integer"
     )
+  }
+)
+
+
+# test warning
+test_that(
+  "check example with invalid dimension f, g",
+  {
+    expect_warning(
+      calculate_mrt_bin_power_f(tau_t, f_new, g_t, beta_new, 
+                                     alpha, p_t, gamma, 20),
+      "f should lie in span of g")
+  }
+)
+
+# test errors
+test_that(
+  "check example with invalid dimension f and beta",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta_new, 
+                                     alpha, p_t, gamma, 1000),
+      "Dimensions of f_t and beta do not agree.")
+  }
+)
+
+
+test_that(
+  "check example with invalid dimension g and alpha",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
+                                     alpha_new, p_t, gamma, 99),
+      "Dimensions of g_t and alpha do not agree.")
+  }
+)
+
+test_that(
+  "test for incorrect number of time points",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(rep(.4, times=2), f_t, g_t, beta, 
+                                     alpha_new, p_t, gamma, 55),
+      "All arguments must agree on number of time points.")
+  }
+)
+
+test_that(
+  "test for invalid type I error",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
+                                     alpha, p_t, -3, 44),
+      "gamma, type I error, should be between 0 and 1")
+  }
+)
+
+
+test_that(
+  "test for invalid type I error",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
+                                alpha, p_t, 'calc', 44),
+      "gamma, type I error, should be between 0 and 1")
   }
 )
