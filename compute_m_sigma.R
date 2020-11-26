@@ -32,13 +32,18 @@ compute_m_sigma <- function(avail_pattern,
   
   # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
   mu0_t <- exp(g_t %*% alpha) 
-  stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
+  
+  if(!(all(mu0_t < 1) & all(mu0_t > 0))) {
+    stop("g_t and alpha values led to invalid probabilities")
+  }
   
   # check that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 1) is 0 and 1.
   mee_t <- f_t %*% beta # MEE(t) for t = 1,...,total_dp
   # E(Y_{t+1} = 1 | I_t = 1, A_t = 1) for t = 1,...,total_dp
   mu1_t <- mu0_t * exp(mee_t) 
-  stopifnot(all(mu1_t < 1) & all(mu1_t > 0))
+  if(!(all(mu1_t < 1) & all(mu1_t > 0))){
+    stop("f_t and beta values led to invalid probabilities.")
+  }
   
   # For each decision point 
   # (T = total # of decision points is taken as the length of p_t, for now)
@@ -48,8 +53,13 @@ compute_m_sigma <- function(avail_pattern,
     this_f_t <- as.numeric(f_t[i, ])
     this_g_t <- as.numeric(g_t[i, ])
     
-    stopifnot(length(this_f_t) == p)
-    stopifnot(length(this_g_t) == q)
+    if(length(this_f_t) != p){
+      stop("Incorrect dimensions for f_t.")
+    }
+    
+    if(length(this_g_t) != q){
+      stop("Incorrect dimsions for g_t.")
+    }
     
     # both are vectors, so use this way to calculate inner product
     this_f_t_times_beta <- sum(this_f_t * beta) 
@@ -64,7 +74,9 @@ compute_m_sigma <- function(avail_pattern,
                            p_t[i]) * this_f_t_f_t
     
     # added a check of dimension
-    stopifnot("matrix" %in% class(this_m) & all(dim(this_m) == c(p, p))) 
+    if(!("matrix" %in% class(this_m) & all(dim(this_m) == c(p, p)))){
+      stop("Incorrect dimensions for M matrix, or improper type.")
+    } 
     
     # A running sum so that we end up with each entry being the sum of that
     # entry across all time points
@@ -82,8 +94,10 @@ compute_m_sigma <- function(avail_pattern,
     
     
     sigma_matrix <- sigma_matrix + this_sigma
-    stopifnot("matrix" %in% class(this_sigma) & 
-                all(dim(this_sigma) == c(p, p)))
+    if(!("matrix" %in% class(this_sigma) & 
+                all(dim(this_sigma) == c(p, p)))){
+      stop("Incorrect dimensions for M matrix, or improper type.")
+    }
   }
   
   return(list(m = m_matrix, sigma = sigma_matrix))
