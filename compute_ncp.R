@@ -17,12 +17,12 @@ compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
     stop("m_matrix must be nonsingular")
   }
   
-  if(length(beta) != dim(m_matrix[1])){
+  if(length(beta) != dim(m_matrix)[1]){
     stop("Dimensions of beta and m_matrix do not agree")
   }
   
   if(dim(m_matrix)[1] != dim(sigma_matrix)[2] | 
-     dim(m_matrix[2] != dim(sigma_matrix[1]))){
+     dim(m_matrix)[2] != dim(sigma_matrix)[1]){
     stop("Dimensions of m_matrix and sigma_matrix do not agree")
   }
   
