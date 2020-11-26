@@ -26,8 +26,6 @@ alpha <- as.matrix(c(-0.2, -0.1), ncol = 1)
 # check that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 0) is between 0 and 1.
 # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
 mu0_t <- exp(g_t %*% alpha) 
-mu0_t # look at the mu0_t values
-stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
 
 ### specify f_t and beta ###
 f_t <- cbind(rep(1, total_dp), 1:total_dp)  # f_t = (1, t)
@@ -39,8 +37,6 @@ mee_t <- f_t %*% beta
 
 # E(Y_{t+1} = 1 | I_t = 1, A_t = 1) for t = 1,...,total_dp
 mu1_t <- mu0_t * exp(mee_t) 
-mu1_t # look at the mu1_t values
-stopifnot(all(mu1_t < 1) & all(mu1_t > 0))
 
 
 p_t <- rep(0.4, total_dp) # randomization probability over time
@@ -54,8 +50,6 @@ alpha <- as.matrix(c(-0.2, -0.1), ncol = 1)
 # check that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 0) is between 0 and 1.
 # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
 mu0_t <- exp(g_t %*% alpha) 
-mu0_t # look at the mu0_t values
-stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
 
 ### specify f_t and beta ###
 f_t <- cbind(rep(1, total_dp), 1:total_dp)  # f_t = (1, t)
@@ -65,8 +59,6 @@ beta <- as.matrix(c(0.15, - 0.01), ncol = 1)
 mee_t <- f_t %*% beta # MEE(t) for t = 1,...,total_dp
 # E(Y_{t+1} = 1 | I_t = 1, A_t = 1) for t = 1,...,total_dp
 mu1_t <- mu0_t * exp(mee_t) 
-mu1_t # look at the mu1_t values
-stopifnot(all(mu1_t < 1) & all(mu1_t > 0))
 
 
 
@@ -204,8 +196,7 @@ test_that(
   "check if first error check of invalid probabilities catches error",
   {
     expect_error(
-      compute_m_sigma(tau_t, f_t, -g_t, beta, 
-                                     alpha, p_t),
+      compute_m_sigma(tau_t, f_t, -g_t, beta, alpha, p_t),
       message="g_t and alpha values led to invalid probabilities")
   }
 )
@@ -214,8 +205,7 @@ test_that(
   "check if second error check of invalid probabilities catches error",
   {
     expect_error(
-      compute_m_sigma(tau_t, f_t, g_t, beta+1, 
-                                     alpha, p_t, gamma, b),
+      compute_m_sigma(tau_t, f_t, g_t, beta+1, alpha, p_t, gamma, b),
       message="f_t and beta values led to invalid probabilities")
   }
 )
@@ -261,3 +251,38 @@ test_that(
   }
 )
 
+test_that(
+  "check that min sample size stops function",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, g_new, beta, 
+                                alpha_new, p_t, gamma,
+                                1),
+      "n is too small"
+    )
+  }
+)
+
+test_that(
+  "check that min sample size stops function",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, g_new, beta, 
+                                alpha_new, p_t, gamma,
+                                -1),
+      "n is too small"
+    )
+  }
+)
+
+test_that(
+  "check that n is an integer",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, g_new, beta, 
+                                alpha_new, p_t, gamma,
+                                100.5),
+      "n must be an integer"
+    )
+  }
+)
