@@ -27,8 +27,41 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
                                            gamma,          
                                            n)               
 {
+  pts <- length(avail_pattern)
+  
+  dim_vec <- c(dim(f_t)[1], dim(g_t)[1], length(p_t))
+  
+  if(!all(dim_vec == pts)){
+    stop("All arguments must agree on number of time points.")
+  }
+  
+  if(dim(f_t)[2] > dim(g_t)[2]){
+    warning("f should lie in span of g")
+  }
+  
+  if(dim(f_t)[2] != length(beta)) {
+    stop("Dimensions of f_t and beta do not agree.")
+  }
+  
+  if(dim(g_t)[2] != length(alpha)) {
+    stop("Dimensions of g_t and alpha do not agree.")
+  }
+  
+  if(gamma < 0 | gamma > 1) {
+    stop("gamma, type I error, should be between 0 and 1")
+  }
+  
+  if(!(all(avail_pattern <= 1 & avail_pattern > 0))){
+    stop("avail_pattern must have values between 0 and 1")
+  }
+  
+
   p <- length(beta)
   q <- length(alpha)
+  
+  if(n < (p+q)) {
+    stop("n is too small")
+  }
   
   m_and_sigma <- compute_m_sigma(avail_pattern, f_t, g_t, beta, alpha, p_t)
   m_matrix <- m_and_sigma$m
