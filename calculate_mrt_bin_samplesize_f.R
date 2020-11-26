@@ -42,6 +42,18 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
         stop("Dimensions of g_t and alpha do not agree.")
     }
     
+    if(gamma < 0 | gamma > 1) {
+        stop("gamma (type I error) should be between 0 and 1")
+    }
+    
+    if(b < 0 | b > 1) {
+        stop("b (type II error) should be between 0 and 1")
+    }
+    
+    if(!(all(avail_pattern <= 1 & avail_pattern > 0))){
+        stop("avail_pattern must have values between 0 and 1")
+    }
+    
     p <- length(beta)
     q <- length(alpha)
     
