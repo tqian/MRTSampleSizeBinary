@@ -15,7 +15,7 @@
 #' @param b             Desired Type II error
 #' @param exact         Determines if exact n or ceiling will be returned
 #'
-#' @return              Power of the test.
+#' @return              Sample size to achieve desired power.
 #' @export
 #'
 #' @examples
@@ -29,6 +29,18 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
                                  b,
                                  exact=FALSE)               
 {
+    
+    if(dim(f_t)[2] > dim(g_t)[2]){
+        warning("f should lie in span of g")
+    }
+    
+    if(dim(f_t)[2] != length(beta)) {
+        stop("Dimensions of f_t and beta do not agree.")
+    }
+    
+    if(dim(g_t)[2] != length(alpha)) {
+        stop("Dimensions of g_t and alpha do not agree.")
+    }
     
     p <- length(beta)
     q <- length(alpha)
