@@ -63,7 +63,7 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
     stop("n is too small")
   }
   
-  if(!is.integer(n)){
+  if(n %% 1 != 0){
     stop("n must be an integer")
   }
   
