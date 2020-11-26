@@ -122,14 +122,14 @@ test_that(
 )
 
 test_that(
-  "check that it works as an inverse of calculate_mrt_bin_power_f",
+  "check that it works as an 'inverse' of calculate_mrt_bin_power_f",
   {
     expect_equal(
       calculate_mrt_bin_samplesize_f(tau_t, f_t, g_new, beta, 
                                 alpha_new, p_t, gamma,
-                                calculate_mrt_bin_power_f(
+                                1-calculate_mrt_bin_power_f(
                                   tau_t, f_t, g_new, beta,
-                                  alpha_new, p_t, gamma, 10),FALSE),
+                                  alpha_new, p_t, gamma, 10), FALSE),
       10)
   }
 )
@@ -234,7 +234,7 @@ test_that(
     expect_equal(
       calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
                                      alpha, p_t, gamma, size1),
-      .3)
+      .7)
   }
 )
 
@@ -244,19 +244,19 @@ test_that(
     expect_equal(
       calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
                                 alpha, p_t, gamma, size2),
-      .1)
+      .9)
   }
 )
 
 test_that(
-  "check that it works as an inverse of calculate_mrt_bin_samplesize_f",
+  "check that it works as an 'inverse' of calculate_mrt_bin_samplesize_f",
   {
     expect_equal(
       calculate_mrt_bin_power_f(tau_t, f_t, g_new, beta, 
                                 alpha_new, p_t, gamma,
                                 calculate_mrt_bin_samplesize_f(
                                   tau_t, f_t, g_new, beta,
-                                  alpha_new, p_t, gamma, 1/pi, TRUE)),
+                                  alpha_new, p_t, gamma, 1-1/pi, TRUE)),
       1/pi, tolerance=.001)
   }
 )
