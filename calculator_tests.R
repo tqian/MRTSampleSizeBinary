@@ -77,6 +77,8 @@ f_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2) # f_t = (1, t)
 beta_new <- as.matrix(c(0.15, - 0.01, -.1), ncol = 1)
 
 # calculate_mrt_bin_samplesize_f tests ------------------------------------
+
+# check outputs for valid inputs
 context("testing that outputs match original function")
 test_that(
   "check TQ's sample",
@@ -120,6 +122,20 @@ test_that(
 )
 
 test_that(
+  "check that it works as an inverse of calculate_mrt_bin_power_f",
+  {
+    expect_equal(
+      calculate_mrt_bin_samplesize_f(tau_t, f_t, g_new, beta, 
+                                alpha_new, p_t, gamma,
+                                calculate_mrt_bin_power_f(
+                                  tau_t, f_t, g_new, beta,
+                                  alpha_new, p_t, gamma, 10),FALSE),
+      10)
+  }
+)
+
+# test warning
+test_that(
   "check example with invalid dimension f, g",
   {
     expect_warning(
@@ -129,6 +145,57 @@ test_that(
   }
 )
 
+# test errors
+test_that(
+  "check example with invalid dimension f and beta",
+  {
+    expect_error(
+      calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta_new, 
+                                     alpha, p_t, gamma, b, TRUE),
+      "Dimensions of f_t and beta do not agree.")
+  }
+)
+
+
+test_that(
+  "check example with invalid dimension g and alpha",
+  {
+    expect_error(
+      calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta, 
+                                     alpha_new, p_t, gamma, b, TRUE),
+      "Dimensions of g_t and alpha do not agree.")
+  }
+)
+
+test_that(
+  "test for incorrect number of time points",
+  {
+    expect_error(
+      calculate_mrt_bin_samplesize_f(rep(.4, times=2), f_t, g_t, beta, 
+                                     alpha_new, p_t, gamma, b, TRUE),
+      "All arguments must agree on number of time points.")
+  }
+)
+
+test_that(
+  "test for invalid type I error",
+  {
+    expect_error(
+      calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta, 
+                                     alpha, p_t, -3, b, TRUE),
+      "gamma, type I error, should be between 0 and 1")
+  }
+)
+
+test_that(
+  "test for invalid type II error",
+  {
+    expect_error(
+      calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta, 
+                                     alpha, p_t, gamma, 100*b, TRUE),
+      "b, type II error, should be between 0 and 1")
+  }
+)
 calculate_mrt_bin_samplesize_f(tau_t, f_new, g_t, beta_new, 
                               alpha, p_t, gamma, b, TRUE)
 
@@ -182,12 +249,15 @@ test_that(
 )
 
 test_that(
-  "check different dimension f, g",
+  "check that it works as an inverse of calculate_mrt_bin_samplesize_f",
   {
     expect_equal(
       calculate_mrt_bin_power_f(tau_t, f_t, g_new, beta, 
-                                alpha_new, p_t, gamma, 184.43823325060882),
-      .2)
+                                alpha_new, p_t, gamma,
+                                calculate_mrt_bin_samplesize_f(
+                                  tau_t, f_t, g_new, beta,
+                                  alpha_new, p_t, gamma, 1/pi, TRUE)),
+      1/pi, tolerance=.001)
   }
 )
 
