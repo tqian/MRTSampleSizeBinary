@@ -1,4 +1,4 @@
-# simulate data for tests -------------------------------------------------
+# simulate vals for tests -------------------------------------------------
 # TQ added
 set.seed(1)
 
@@ -76,10 +76,10 @@ size2 <- calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta,
 test_that(
   "check TQ's sample",
   {
-    expect_equal(
+    expect_warning(
       calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
                                 alpha, p_t, gamma, size1),
-      .7)
+      "n should be an integer")
   }
 )
 
@@ -88,8 +88,8 @@ test_that(
   {
     expect_equal(
       calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
-                                alpha, p_t, gamma, size2),
-      .9)
+                                alpha, p_t, gamma, round(size2)),
+      .9, tol=0.0001)
   }
 )
 
@@ -126,18 +126,6 @@ test_that(
                                 alpha_new, p_t, gamma,
                                 -1),
       "n is too small"
-    )
-  }
-)
-
-test_that(
-  "check that n is an integer",
-  {
-    expect_error(
-      calculate_mrt_bin_power_f(tau_t, f_t, g_new, beta, 
-                                alpha_new, p_t, gamma,
-                                100.5),
-      "n must be an integer"
     )
   }
 )
