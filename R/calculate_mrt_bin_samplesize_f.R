@@ -16,6 +16,7 @@
 #' @param exact         Determines if exact n or ceiling will be returned
 #'
 #' @return              Sample size to achieve desired power.
+#' @import              stats
 #' @export
 #'
 #' @examples
