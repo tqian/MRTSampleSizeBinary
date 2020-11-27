@@ -1,53 +1,43 @@
 
-# we want n to vary 
-library(ggplot2)
-
-
-
-#' Title
+#' Returns a plot of power vs sample size in the context of MRT
 #'
-#' @param n Sample size
+#' @param avail_pattern A vector of length T that is the average availability at
+#'   each time point
+#' @param f_t           Defines marginal excursion effect MEE(t) under
+#'   alternative together with beta
+#' @param g_t           Defines success probability null curve together with
+#'   alpha
+#' @param beta          Defines marginal excursion effect MEE(t) under
+#'   alternative together with g_t
+#' @param alpha         Defines success probability null curve together with f_t
+#' @param p_t           Randomization probability at each time point
+#' @param gamma         Desired Type I error
+#' @param n             Number of participants, sample size
 #'
-#' @return plots power vs. sample size, based on all other inputs used in the main function
+#' @return              Plot of power and sample sice
 #' @export
 #'
 #' @examples
-plot_power <- function(n) {
-  if( n<0 ) {
-    stop(" n has to be greater than zero")
+plot_power_vs_samplesize <- function(avail_pattern,
+                                     f_t,
+                                     g_t,
+                                     beta,
+                                     alpha,
+                                     p_t,
+                                     gamma,
+                                     n)
+{
+  min_n <- length(beta) + length(alpha)
+  n_vec <- c(seq(min_n +1, n + 200, by = 1))
+  l <- length(n_vec)
+  power_vec <- c(rep(NA, l))
+  
+  for (n_i in n_vec){
+    indx <- which(n_vec == n_i)
+    power_vec[indx] <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma,n_i)
   }
   
-  n_vec <- c(seq(0,n, by = 1))  
-  
-  power <- function(...){
-    calculate_mrt_bin_power_f(tau_t, f_t, g_t  , beta, alpha, p_t, gamma,...)
-    
-  }
-  plot(n_vec, power(n_vec))
-  
+  power_vec
+  length(power_vec)
+  plot(n_vec, power_vec)
 }
-
-
-plot_power(n = 699)
-
-ggplot(data, aes(y = power, x= n_vec)) +  
-  geom_point()
-coord_cartesian( xlim = c(0, 1000), ylim=c(0, 1) )+ 
-  labs(title="Power vs. Sample Size", y="Power", x="Sample size")
-
-
-
-##### the other way around   
-
-b_vect <-  c(seq(0.01,0.999991, by = 0.015))
-length(b_vect)
-
-sampe_size_vect <- function(...){
-  calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta, alpha, p_t, gamma, ...)
-}
-
-
-sampe_size_vect(b_vect)
-
-
-calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta, alpha, p_t, gamma,0.100)
