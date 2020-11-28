@@ -16,7 +16,7 @@
 #'   and the second is the Sigma matrix.
 #' @export
 #'
-#' @examples
+#' @examples compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1)
 compute_m_sigma <- function(avail_pattern,  
                             f_t,             
                             g_t,            
