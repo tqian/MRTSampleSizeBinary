@@ -1,5 +1,5 @@
 ---
-title: "sample-size-calcualtor-for-mrt"
+title: "Sample Size Calculator for Micro Randomized Trials"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{sample-size-calcualtor-for-mrt}
@@ -17,3 +17,72 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(mrtbincalc)
 ```
+
+# Introductin 
+This package provides a sample size calculator for Micro-randomized Trials (MRT) with binary outcomes. The sample size formula is developed in Sample Size Considerations for Micro-Randomized Trials with Binary Outcome.
+
+The outputs in this package are power and sample size in the context of MRT.
+In both cases, you will need to input the desired significance level.
+
+
+To use this package for an MRT,  you need some required inputs from the
+
+
+# Study Setup: 
+ *The duration of the study in days
+ *The number of decision time points within each day
+ *the randomization probability, i.e. the probability of assigning the treatment at a decision time point. 
+
+To illustrate, we provide an example of such input:
+
+```{r}
+set.seed(1)
+
+total_dp <- 10 # total number of decision points
+tau_t_1 <- rep(0.8, total_dp) # expected availability E(I_t) for t = 1,...,total_dp
+
+p_t_1 <- rep(0.4, total_dp) # randomization probability over time
+gamma_1 <- 0.05 # type I error
+b_1 <- 0.2 # type II error; power = 1 - b
+
+
+
+```
+
+
+```{r}
+### specify g_t and alpha ###
+g_t_1 <- cbind(rep(1, total_dp), 1:total_dp)  # f_t_1 = (1,g_t_1)
+alpha_1 <- as.matrix(c(-0.2, -0.1), ncol = 1)
+
+# checking that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 0) should always be between 0 and 1.
+mu0_t<- exp(g_t_1 %*% alpha_1) # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
+#mu0_t_1 # look at the mu0_t values
+stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
+
+### specify f_t and beta ###
+f_t_1 <- cbind(rep(1, total_dp), 1:total_dp)  # f_t = (1, t)
+beta_1 <- as.matrix(c(0.15, - 0.01), ncol = 1)
+
+# checking that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 1) should always be between 0 and 1.
+mee_t <- f_t_1 %*% beta_1 # MEE(t) for t = 1,...,total_dp
+mu1_t <- mu0_t * exp(mee_t) # E(Y_{t+1} = 1 | I_t = 1, A_t = 1) for t = 1,...,total_dp
+#mu1_t # look at the mu1_t values
+stopifnot(all(mu1_t < 1) & all(mu1_t > 0))
+
+```
+
+
+
+# Availability
+Treatment can only be provided when an individual is available; The expected availability is the probability a person is available to receive the intervention at the decision times.
+To use this package, you need to select a time-varying pattern for the expected availability. There are tow patterns you can choose from: constant, or linear over decision points.
+
+3. Success Probability Null Curve
+The Success Probability Null Curve at each decision time point is defined as the probability of the proximal outcome equal to 1 for available individuals who are not assigned treatment.
+You need to provide the trend of success probability null curve. This could be either constant or linear over decision points.
+
+4. Proximal Treatment Effect
+The Proximal Treatment Effect at each decision time point is defined as the mean difference in the proximal outcome between available people who are assigned a treatment versus available people who are not assigned treatment. In this work, we only consider the binary treatment. You need to provide the trend of proximal treatment effects. This could be either constant or time-varying, e.g. linear or quadratic over decision points.
+
+
