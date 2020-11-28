@@ -19,7 +19,7 @@ g_t_1 <- cbind(rep(1, total_dp), 1:total_dp)  # f_t = (1,g_t)
 alpha_1 <- as.matrix(c(-0.2, -0.1), ncol = 1)
 
 # checking that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 0) should always be between 0 and 1.
-mu0_t_1 <- exp(g_t_1 %*% alpha_1) # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
+mu0_t_1 <- exp(g_t %*% alpha) # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
 mu0_t_1 # look at the mu0_t values
 stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
 
@@ -34,29 +34,24 @@ mu1_t # look at the mu1_t values
 stopifnot(all(mu1_t < 1) & all(mu1_t > 0))
 
 ### saving the inputs in a list bc they have different kinds of data, vectors, matrices and scalars 
-# #input_example <- list(total_dp = total_dp,
-#                       tau_t_1 = tau_t_1, 
-#                       f_t_1 = f_t_1, 
-#                       g_t_1 = g_t_1, 
-#                       p_t_1 = p_t_1, 
-#                       beta_1 = beta_1,
-#                       alpha_1 = alpha_1,
-#                       b_1 = b_1, 
-#                       gamma_1 = gamma_1
-#                       )
+input_example <- list(total_dp = total_dp,
+                      tau_t_1 = tau_t_1, 
+                      f_t_1 = f_t_1, 
+                      g_t_1 = g_t_1, 
+                      p_t_1 = p_t_1, 
+                      beta_1 = beta_1,
+                      alpha_1 = alpha_1,
+                      b_1 = b_1, 
+                      gamma_1 = gamma_1
+                      )
 
-
+usethis::use_data(total_dp, overwrite = TRUE)
 usethis::use_data(tau_t_1, overwrite = TRUE)
 usethis::use_data(f_t_1, overwrite = TRUE)
 usethis::use_data(g_t_1, overwrite = TRUE)
 usethis::use_data(p_t_1, overwrite = TRUE)
 usethis::use_data(beta_1, overwrite = TRUE)
-usethis::use_data(gamma_1, overwrite = TRUE)
-usethis::use_data(b_1, overwrite = TRUE)
 usethis::use_data(alpha_1, overwrite = TRUE)
-usethis::use_data(total_dp, overwrite = TRUE)
-
-
-
-
+usethis::use_data(b_1, overwrite = TRUE)
+usethis::use_data(gamma_1, overwrite = TRUE)
 
