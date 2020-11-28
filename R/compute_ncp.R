@@ -11,7 +11,7 @@
 #'   variable.
 #' @export
 #'
-#' @examples
+#' @examples compute_ncp
 compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
   if(det(m_matrix) == 0){
     stop("m_matrix must be nonsingular")

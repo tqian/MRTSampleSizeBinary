@@ -12,25 +12,24 @@
 #' @param alpha         Defines success probability null curve together with f_t
 #' @param p_t           Randomization probability at each time point
 #' @param gamma         Desired Type I error
-#' @param n             Number of participants, sample size
 #'
 #' @return              Plot of power and sample size
 #' @export
 #' @import ggplot2
 #'
-#' @examples plot_power_vs_samplesize(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, 300)
-plot_power_vs_samplesize <- function(avail_pattern,
+#' @examples power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1)
+power_vs_n_plot <- function(avail_pattern,
                                      f_t,
                                      g_t,
                                      beta,
                                      alpha,
                                      p_t,
-                                     gamma,
-                                     n)
+                                     gamma
+                                     )
 {
   
   min_n <- length(beta) + length(alpha)
-  n_vec <- c(seq(min_n +1, n + 200, by = 1))
+  n_vec <- c(seq(min_n +1, min_n + 1000, by = 1))
   l <- length(n_vec)
   power_vec <- c(rep(NA, l))
   
@@ -46,9 +45,9 @@ plot_power_vs_samplesize <- function(avail_pattern,
   # length(power_vec)
   
   ggplot(power_n_data)+
-    geom_line(aes(x = n_vec, y = power_vec))+
+    geom_line(aes(x = power_vec, y = n_vec), color = "blue")+
     ggtitle("Power vs. Sample Size") +
-    xlab("Sample size") + ylab("Power")
+    xlab("Power") + ylab("Sample Size")
   
   
   

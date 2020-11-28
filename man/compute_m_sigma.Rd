@@ -34,3 +34,6 @@ Computes "M" and "Sigma" matrices for the sandwich estimator of
 variance-covariance matrix. Primarily a helper function for
 calculate_mrt_bin_power_f and calculate_mrt_bin_samplesize_f.
 }
+\examples{
+compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1)
+}

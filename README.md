@@ -1,9 +1,9 @@
-# package
+# package :"mrtbincalc"
 
 This package provides a sample size calculator for Micro-randomized Trials with binary outcomes. The sample size formula is developed in Sample Size Considerations for Micro-Randomized Trials with Binary Outcome 
 
 
-To use this package you need some required inputs, listed below under subtiles numbered from one to four.
+To use this package you need some required inputs, listed below under subtitles numbered from one to four.
 1. Study Setup, which includes the duration of the study in days, the number of decision time points within each day, the randomization probability, i.e. the probability of assigning the treatment at a decision time point. 
 
 2. Availability
