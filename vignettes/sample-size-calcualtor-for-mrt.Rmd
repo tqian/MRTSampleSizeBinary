@@ -1,0 +1,19 @@
+---
+title: "sample-size-calcualtor-for-mrt"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sample-size-calcualtor-for-mrt}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mrtbincalc)
+```

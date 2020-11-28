@@ -17,7 +17,7 @@
 #' @return              Power of the test.
 #' @export
 #'
-#' @examples
+#' @examples calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, 300)
 calculate_mrt_bin_power_f <- function(avail_pattern,  
                                            f_t,             
                                            g_t,             
