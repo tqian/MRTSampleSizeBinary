@@ -13,6 +13,8 @@
 #' @param p_t           Randomization probability at each time point
 #' @param gamma         Desired Type I error
 #' @param n             Number of participants
+#' 
+#' @importFrom          stats qf pf
 #'
 #' @return              Power of the test.
 #' @export

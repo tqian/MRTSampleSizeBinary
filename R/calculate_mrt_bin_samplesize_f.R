@@ -16,7 +16,7 @@
 #' @param exact         Determines if exact n or ceiling will be returned
 #'
 #' @return              Sample size to achieve desired power.
-#' @import              stats
+#' @importFrom          stats uniroot qf pf
 #' @export
 #'
 #' @examples calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, b_1)
