@@ -14,7 +14,8 @@
 #' @param gamma         Desired Type I error
 #' @param n             Number of participants
 #'
-#' @return              Power of the test.
+#' @return              Power of the test for fixed null/alternative and sample
+#'   size.
 #' @export
 #'
 #' @examples calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, 300)
