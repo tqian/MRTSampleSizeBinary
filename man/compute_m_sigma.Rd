@@ -13,17 +13,18 @@ compute_m_sigma(avail_pattern, f_t, g_t, beta, alpha, p_t)
 each time point}
 
 \item{f_t}{Defines marginal excursion effect MEE(t) under
-alternative together with beta}
+alternative together with beta. Assumed to be matrix of size T*p.}
 
 \item{g_t}{Defines success probability null curve together with
-alpha}
+alpha. Assumed to be matrix of size T*q.}
 
-\item{beta}{Defines marginal excursion effect MEE(t) under
-alternative together with g_t}
+\item{beta}{Length p vector that defines marginal excursion effect
+MEE(t) under alternative together with g_t.}
 
-\item{alpha}{Defines success probability null curve together with f_t}
+\item{alpha}{Length q vector that defines success probability null
+curve together with f_t.}
 
-\item{p_t}{Randomization probability at each time point}
+\item{p_t}{Length T vector of randomization probabilities at each time point}
 }
 \value{
 List containing two matrices. The first is the M matrix
