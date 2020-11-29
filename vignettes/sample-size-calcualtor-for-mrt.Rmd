@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(mrtbincalc)
 ```
 
-# Introductin 
+# Introduction 
 This package provides a sample size calculator for Micro-randomized Trials (MRT) with binary outcomes. The sample size formula is developed in Sample Size Considerations for Micro-Randomized Trials with Binary Outcome.
 
 The outputs in this package are power and sample size in the context of MRT.
