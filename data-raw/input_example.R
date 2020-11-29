@@ -19,7 +19,7 @@ g_t_1 <- cbind(rep(1, total_dp), 1:total_dp)  # f_t = (1,g_t)
 alpha_1 <- as.matrix(c(-0.2, -0.1), ncol = 1)
 
 # checking that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 0) should always be between 0 and 1.
-mu0_t_1 <- exp(g_t %*% alpha) # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
+mu0_t_1 <- exp(g_t_1 %*% alpha_1) # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
 mu0_t_1 # look at the mu0_t values
 stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
 
