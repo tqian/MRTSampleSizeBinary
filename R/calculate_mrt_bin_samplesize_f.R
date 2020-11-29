@@ -4,19 +4,21 @@
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
-#'   alternative together with beta
+#'   alternative together with beta. Assumed to be matrix of size T*p.
 #' @param g_t           Defines success probability null curve together with
-#'   alpha
-#' @param beta          Defines marginal excursion effect MEE(t) under
-#'   alternative together with g_t
-#' @param alpha         Defines success probability null curve together with f_t
-#' @param p_t           Randomization probability at each time point
+#'   alpha. Assumed to be matrix of size T*q.
+#' @param beta          Length p vector that defines marginal excursion effect
+#'   MEE(t) under alternative together with g_t.
+#' @param alpha         Length q vector that defines success probability null
+#'   curve together with f_t.
+#' @param p_t           Length T vector of Randomization probabilities at each
+#'   time point.
 #' @param gamma         Desired Type I error
 #' @param b             Desired Type II error
 #' @param exact         Determines if exact n or ceiling will be returned
 #'
 #' @return              Sample size to achieve desired power.
-#' @import              stats
+#' @importFrom          stats uniroot qf pf
 #' @export
 #'
 #' @examples calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, b_1)

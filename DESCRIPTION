@@ -1,11 +1,10 @@
 Package: mrtbincalc
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Power and Sample Size Calculator for MRT
 Version: 0.1.0
 Author: Tianchen Qian, Eliot Wong-Toi, Thabat Dahdoul
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Maintainer: Tianchen Qian <tiancq1@uci.edu>
+Description: Power and sample size calculator for micro-randomized trials with binary outcomes.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

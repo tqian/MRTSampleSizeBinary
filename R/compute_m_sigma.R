@@ -5,13 +5,14 @@
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
-#'   alternative together with beta
+#'   alternative together with beta. Assumed to be matrix of size T*p.
 #' @param g_t           Defines success probability null curve together with
-#'   alpha
-#' @param beta          Defines marginal excursion effect MEE(t) under
-#'   alternative together with g_t
-#' @param alpha         Defines success probability null curve together with f_t
-#' @param p_t           Randomization probability at each time point
+#'   alpha. Assumed to be matrix of size T*q.
+#' @param beta          Length p vector that defines marginal excursion effect
+#'   MEE(t) under alternative together with g_t.
+#' @param alpha         Length q vector that defines success probability null
+#'   curve together with f_t.
+#' @param p_t           Length T vector of randomization probabilities at each time point
 #' @return              List containing two matrices. The first is the M matrix
 #'   and the second is the Sigma matrix.
 #' @export

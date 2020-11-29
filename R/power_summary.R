@@ -17,6 +17,9 @@
 #' @import dplyr
 #'
 #' @examples   power_summary(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1)
+
+
+library(mrtbincalc)
 power_summary <- function(avail_pattern,
                           f_t,
                           g_t,
@@ -26,32 +29,38 @@ power_summary <- function(avail_pattern,
                           gamma
 )
 {
-   t <- summarise(data.frame(gamma))
-  # min_n <- length(beta) + length(alpha)
-  # n_vec <- c(seq(min_n +1, min_n + 1000, by = 1))
-  # l <- length(n_vec)
-  # power_vec <- c(rep(NA, l))
-  # 
-  # for (n_i in n_vec){
-  #   indx <- which(n_vec == n_i)
-  #   power_vec[indx] <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma,n_i)
-  #   
-  # }
-  # #power_vec
-  # #n_vec
-  # power_n_data <- data.frame(round(power_vec,3),  n_vec)
-  # selected_power <- filter( power_n_data, power_vec == c(seq(0.6, 0.95, by = 0.050)))
-  # input <- list("Available Pattern" = avail_pattern,
-  #               "f(t)" = f_t, 
-  #               "g(t)" = g_t, 
-  #               "beta" = beta, 
-  #               "alpha" = alpha,
-  #               "Randomization prob" = p_t,
-  #               "Desired Type I error" = gamma)
-  # input
-  # selected_power
-  # 
-  # #power_n_data 
-  # 
- return(0 )
+  
+  min_n <- length(beta) + length(alpha)
+  n_vec <- c(seq(min_n +1, min_n + 100, by = 1))
+  l <- length(n_vec)
+  power_vec <- c(rep(NA, l))
+
+  for (n_i in n_vec){
+    indx <- which(n_vec == n_i)
+    power_vec[indx] <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma,n_i)
+
+  }
+  #power_vec
+  #n_vec
+  
+  
+  power_n_data <- data.frame(power_vec = round(power_vec, 3),  n_vec)
+  selected_power <- dplyr::filter(power_n_data, power_vec %in% seq(0.6, 0.95, by = 0.05))
+  input <- list("Available Pattern" = avail_pattern,
+                "f(t)" = f_t,
+                "g(t)" = g_t,
+                "beta" = beta,
+                "alpha" = alpha,
+                "Randomization prob" = p_t,
+                "Desired Type I error" = gamma)
+  #input
+  (selected_power)
+  
+  #power_n_data
+
+
 }
+power_summary(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1)
+
+
+(z = dplyr::filter(data.frame(x =c(1,2,3), y= c(4,5,6)), x %in% c(1,10)) )
