@@ -31,7 +31,7 @@ power_summary <- function(avail_pattern,
                           gamma,
                           power_levels = seq(from=0.6, to=0.95, by=0.05)) {
   
-  if(!(all.equal(power_levels > 0.5 & power_levels < 1))){
+  if(!(all(power_levels > 0.5 & power_levels < 1))){
     stop("Power should be between 0.5 and 1")
   }
   
@@ -43,5 +43,5 @@ power_summary <- function(avail_pattern,
                                                         1-power_levels[r])
   }
   
-  kable(power_size)
+  power_size
 }
