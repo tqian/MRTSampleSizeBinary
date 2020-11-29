@@ -10,8 +10,11 @@
 #' @return Returns non-centrality parameter for an F distributed random
 #'   variable.
 #' @export
-#'
-#' @examples compute_ncp
+#' 
+#' @examples 
+#compute_ncp(n, beta_1, m_matrix_1, sigma_matrix_1)
+
+
 compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
   if(det(m_matrix) == 0){
     stop("m_matrix must be nonsingular")

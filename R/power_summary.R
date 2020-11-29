@@ -34,11 +34,11 @@ power_summary <- function(avail_pattern,
   n_vec <- c(seq(min_n +1, min_n + 100, by = 1))
   l <- length(n_vec)
   power_vec <- c(rep(NA, l))
-
+  
   for (n_i in n_vec){
     indx <- which(n_vec == n_i)
     power_vec[indx] <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma,n_i)
-
+    
   }
   #power_vec
   #n_vec
@@ -57,8 +57,8 @@ power_summary <- function(avail_pattern,
   (selected_power)
   
   #power_n_data
-
-
+  
+  
 }
 power_summary(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1)
 
