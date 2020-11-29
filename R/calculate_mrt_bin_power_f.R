@@ -14,15 +14,14 @@
 #' @param gamma         Desired Type I error
 #' @param n             Number of participants
 #'
-#' @return              Power of the test.
 #' @importFrom          stats qf pf
 #'
 #' @return              Power of the test for fixed null/alternative and sample
 #'   size.
 #' @export
 #'
-#' @examples            calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, 
-#' alpha_1, p_t_1, 0.05, 100)
+#' @examples            calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1,
+#'                                               alpha_1, p_t_1, 0.05, 100)
 calculate_mrt_bin_power_f <- function(avail_pattern,  
                                       f_t,             
                                       g_t,             
