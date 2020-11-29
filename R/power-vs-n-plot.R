@@ -16,8 +16,9 @@
 #' @return              Plot of power and sample size
 #' @export
 #' @import ggplot2
-#'
-#' @examples power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1)
+#' 
+#' @examples            power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
+#'                         p_t_1, 0.05)
 power_vs_n_plot <- function(avail_pattern,
                                      f_t,
                                      g_t,
