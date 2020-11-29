@@ -27,7 +27,6 @@
 #'   "gamma_1",
 #'   "m_matrix_1",
 #'   "sigma_matrix_1",
-#'   "x"
 #'   
 #'   
 #'   
