@@ -39,13 +39,23 @@ time point.}
 \item{power_levels}{Vector of powers to find sample size for.}
 }
 \value{
-Table containing needed sample size to achieve some
+Dataframe containing needed sample size to achieve
   user-specified power values.
 }
 \description{
-Reports the power of a binary outcome MRT at a range of power levels.
+The sample size calculator is based on an asymptotic result with a small
+sample correction. When the calculator finds out that a sample size less than
+or equal to 10 is sufficient to attain the desired power, the calculator does
+not output the exact sample size but produces an error message, because in
+this situation the sample size result may not be as accurate. In general,
+when the output sample size is small, one might reconsider the following: 
+(1) whether you are correctly or conservatively guessing the average of expected
+availability, 
+(2) whether the duration of study is too long, 
+(3) whether the treatment effect is overestimated, and 
+(4) whether the power is set too low.
 }
 \examples{
-           power_summary(tau_t_1, f_t_1, g_t_1, 
+           power_summary(tau_t_1, f_t_1, g_t_1,
 beta_1, alpha_1, p_t_1, 0.05)
 }
