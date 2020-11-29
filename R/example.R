@@ -1,10 +1,3 @@
-#' The number of data points
-#' @format numeric value
-#' \describe{
-#' 10
-#' }
-"total_dp"
-
 #' Time avail vec
 #' @format vector of length T
 #' \describe{A vector of length T that is the aver availability at each time point.}
@@ -43,24 +36,6 @@
 #' \describe{
 #' adsf}
 "alpha_1"
-
-#' bea
-#' @format beta
-#' \describe{
-#' adsf}
-"gamma_1"
-
-#' a'kdfjs
-#' @format beta
-#' \describe{
-#' adsf}
-"b_1"
-
-#' a'kdfjs
-#' @format beta
-#' \describe{
-#' adsf}
-"x"
 
 #' a'kdfjs
 #' @format beta
