@@ -38,3 +38,7 @@ Power of the test for fixed null/alternative and sample
 Returns power of a test given a prespecified sample size in the context of a
 binary MRT.
 }
+\examples{
+           calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, 
+alpha_1, p_t_1, 0.05, 100)
+}

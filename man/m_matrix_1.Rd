@@ -3,16 +3,17 @@
 \docType{data}
 \name{m_matrix_1}
 \alias{m_matrix_1}
-\title{a'kdfjs}
+\title{An example matrix for "bread" of sandwich estimator of variance.}
 \format{
-beta
+A 2 by 2 matrix
 \describe{
-adsf}
+Generated from a toy example.
+}
 }
 \usage{
 m_matrix_1
 }
 \description{
-a'kdfjs
+An example matrix for "bread" of sandwich estimator of variance.
 }
 \keyword{datasets}

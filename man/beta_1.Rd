@@ -3,16 +3,18 @@
 \docType{data}
 \name{beta_1}
 \alias{beta_1}
-\title{null}
+\title{Vector that defines the alternative hypothesis.}
 \format{
-beta
+a length 2 vector
 \describe{
-adsf}
+The matrix multiplication of this vector with f_t_1 defines the MEE under the
+alternative hypothesis.
+}
 }
 \usage{
 beta_1
 }
 \description{
-null
+Vector that defines the alternative hypothesis.
 }
 \keyword{datasets}

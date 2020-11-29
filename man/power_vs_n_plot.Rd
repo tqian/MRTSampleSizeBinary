@@ -32,5 +32,6 @@ Plot of power and sample size
 Returns a plot of power vs sample size in the context of MRT
 }
 \examples{
-power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1)
+           power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
+                        p_t_1, 0.05)
 }

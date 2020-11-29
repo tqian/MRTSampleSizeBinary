@@ -3,16 +3,18 @@
 \docType{data}
 \name{alpha_1}
 \alias{alpha_1}
-\title{alt}
+\title{Vector that defines the null hypothesis.}
 \format{
-beta
+a length 2 vector
 \describe{
-adsf}
+The matrix multiplication of this vector with g_t_1 defines the MEE under the
+null hypothesis.
+}
 }
 \usage{
 alpha_1
 }
 \description{
-alt
+Vector that defines the null hypothesis.
 }
 \keyword{datasets}

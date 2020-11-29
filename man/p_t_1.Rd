@@ -3,9 +3,9 @@
 \docType{data}
 \name{p_t_1}
 \alias{p_t_1}
-\title{probs}
+\title{A vector of probabilities for each time point.}
 \format{
-a length T vector of probability for each time
+a length T vector
 \describe{
 vectro of probs
 }
@@ -14,6 +14,6 @@ vectro of probs
 p_t_1
 }
 \description{
-probs
+A vector of probabilities for each time point.
 }
 \keyword{datasets}

@@ -3,15 +3,16 @@
 \docType{data}
 \name{tau_t_1}
 \alias{tau_t_1}
-\title{Time avail vec}
+\title{Vector that holds the average availability at each time point.}
 \format{
 vector of length T
-\describe{A vector of length T that is the aver availability at each time point.}
+\describe{A vector of length T that is the average availability
+ at each decision point.}
 }
 \usage{
 tau_t_1
 }
 \description{
-Time avail vec
+Vector that holds the average availability at each time point.
 }
 \keyword{datasets}

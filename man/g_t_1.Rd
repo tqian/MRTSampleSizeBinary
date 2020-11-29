@@ -3,17 +3,17 @@
 \docType{data}
 \name{g_t_1}
 \alias{g_t_1}
-\title{vec alte}
+\title{A matrix defining the null hypothesis.}
 \format{
-a 2 by 10 matrix defining a linear effect
+a 2 by 10 matrix
 \describe{
-vector for alternative
+In this example it is a log-linear trend.
 }
 }
 \usage{
 g_t_1
 }
 \description{
-vec alte
+A matrix defining the null hypothesis.
 }
 \keyword{datasets}
