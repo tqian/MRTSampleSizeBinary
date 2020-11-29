@@ -4,33 +4,28 @@
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
-#'   alternative together with beta. Assumed to be matrix of size T*p.
+#'   alternative together with beta
 #' @param g_t           Defines success probability null curve together with
-#'   alpha. Assumed to be matrix of size T*q.
-#' @param beta          Length p vector that defines marginal excursion effect
-#'   MEE(t) under alternative together with g_t.
-#' @param alpha         Length q vector that defines success probability null
-#'   curve together with f_t.
-#' @param p_t           Length T vector of Randomization probabilities at each
-#'   time point.
+#'   alpha
+#' @param beta          Defines marginal excursion effect MEE(t) under
+#'   alternative together with g_t
+#' @param alpha         Defines success probability null curve together with f_t
+#' @param p_t           Randomization probability at each time point
 #' @param gamma         Desired Type I error
 #' @param n             Number of participants
 #'
-#' @return              Power of the test for fixed null/alternative and sample
-#'   size.
-#' @importFrom          stats qf pf
-#'
+#' @return              Power of the test.
 #' @export
 #'
-#' @examples calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, 300)
+#' @examples
 calculate_mrt_bin_power_f <- function(avail_pattern,  
-                                           f_t,             
-                                           g_t,             
-                                           beta,            
-                                           alpha,           
-                                           p_t,             
-                                           gamma,          
-                                           n)               
+                                      f_t,             
+                                      g_t,             
+                                      beta,            
+                                      alpha,           
+                                      p_t,             
+                                      gamma,          
+                                      n)               
 {
   pts <- length(avail_pattern)
   
@@ -60,7 +55,7 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
     stop("avail_pattern must have values between 0 and 1")
   }
   
-
+  
   p <- length(beta)
   q <- length(alpha)
   
@@ -78,7 +73,7 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
   sigma_matrix <- m_and_sigma$sigma
   
   return(1-pf(q=qf(p=(1-gamma), df1=p, df2=n-q-p), 
-     df1=p, 
-     df2=n-q-p, 
-     ncp=compute_ncp(n, beta, m_matrix, sigma_matrix)))
+              df1=p, 
+              df2=n-q-p, 
+              ncp=compute_ncp(n, beta, m_matrix, sigma_matrix)))
 }
