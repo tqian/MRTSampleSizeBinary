@@ -1,77 +1,60 @@
-#' The number of data points
-#' @format numeric value
-#' \describe{
-#' 10
-#' }
-"total_dp"
-
-#' Time avail vec
+#' Vector that holds the average availability at each time point.
 #' @format vector of length T
-#' \describe{A vector of length T that is the aver availability at each time point.}
+#' \describe{A vector of length T that is the average availability
+#'  at each decision point.}
 "tau_t_1"
 
-#' Lin eff
-#' @format a 2 by 10 matrix defining a linear effect
+#' A matrix defining the alternative hypothesis.
+#' @format a 2 by 10 matrix
 #' \describe{
-#' vector for the null
+#' In this example it is a log-linear trend.
 #' }
 "f_t_1"
    
-#' vec alte
-#' @format a 2 by 10 matrix defining a linear effect
+#' A matrix defining the null hypothesis.
+#' @format a 2 by 10 matrix
 #' \describe{
-#' vector for alternative
+#' In this example it is a log-linear trend.
 #' }
 "g_t_1"
 
 
-#' probs   
-#' @format a length T vector of probability for each time
+#' A vector of probabilities for each time point.  
+#' @format a length T vector
 #' \describe{
 #' vectro of probs
 #' }
 "p_t_1"
 
-#' null
-#' @format beta
+#' Vector that defines the alternative hypothesis.
+#' @format a length 2 vector
 #' \describe{
-#' adsf}
+#' The matrix multiplication of this vector with f_t_1 defines the MEE under the
+#' alternative hypothesis.
+#' }
 "beta_1"
 
-#' alt
-#' @format beta
+#' Vector that defines the null hypothesis.
+#' @format a length 2 vector
 #' \describe{
-#' adsf}
+#' The matrix multiplication of this vector with g_t_1 defines the MEE under the
+#' null hypothesis.
+#' }
 "alpha_1"
 
-#' bea
-#' @format beta
-#' \describe{
-#' adsf}
-"gamma_1"
 
-#' a'kdfjs
-#' @format beta
+#' An example matrix for "meat" of sandwich estimator of variance.
+#' @format A 2 by 2 matrix
 #' \describe{
-#' adsf}
-"b_1"
-
-#' a'kdfjs
-#' @format beta
-#' \describe{
-#' adsf}
-"x"
-
-#' a'kdfjs
-#' @format beta
-#' \describe{
-#' adsf}
+#' Generated from a toy example.
+#' }
 "sigma_matrix_1"
 
-#' a'kdfjs
-#' @format beta
+#' An example matrix for "bread" of sandwich estimator of variance.
+#' @format A 2 by 2 matrix
 #' \describe{
-#' adsf}
+#' Generated from a toy example.
+#' }
 "m_matrix_1"
 
 
