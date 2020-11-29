@@ -16,9 +16,14 @@
 #' @param gamma         Desired Type I error
 #' @param n             Number of participants
 #'
+<<<<<<< HEAD
+#' @return              Power of the test for fixed null/alternative and sample
+#'   size.
+=======
 #' @importFrom          stats qf pf
 #'
 #' @return              Power of the test.
+>>>>>>> 0f4e83079981b6884f99c460a8af1abb789f19c0
 #' @export
 #'
 #' @examples calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, 300)
