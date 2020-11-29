@@ -21,7 +21,8 @@
 #' @importFrom          stats uniroot qf pf
 #' @export
 #'
-#' @examples calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, b_1)
+#' @examples calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, 
+#' beta_1, alpha_1, p_t_1, 0.05, .2, FALSE)
 calculate_mrt_bin_samplesize_f <- function(avail_pattern,  
                                  f_t,             
                                  g_t,             
