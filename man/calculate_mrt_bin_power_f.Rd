@@ -12,19 +12,17 @@ calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma, n)
 each time point}
 
 \item{f_t}{Defines marginal excursion effect MEE(t) under
-alternative together with beta. Assumed to be matrix of size T*p.}
+alternative together with beta}
 
 \item{g_t}{Defines success probability null curve together with
-alpha. Assumed to be matrix of size T*q.}
+alpha}
 
-\item{beta}{Length p vector that defines marginal excursion effect
-MEE(t) under alternative together with g_t.}
+\item{beta}{Defines marginal excursion effect MEE(t) under
+alternative together with g_t}
 
-\item{alpha}{Length q vector that defines success probability null
-curve together with f_t.}
+\item{alpha}{Defines success probability null curve together with f_t}
 
-\item{p_t}{Length T vector of Randomization probabilities at each
-time point.}
+\item{p_t}{Randomization probability at each time point}
 
 \item{gamma}{Desired Type I error}
 
@@ -32,11 +30,11 @@ time point.}
 }
 \value{
 Power of the test.
+
+Power of the test for fixed null/alternative and sample
+  size.
 }
 \description{
 Returns power of a test given a prespecified sample size in the context of a
 binary MRT.
-}
-\examples{
-calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, gamma_1, 300)
 }

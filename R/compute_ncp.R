@@ -11,8 +11,7 @@
 #'   variable.
 #' @export
 #' 
-#' @examples 
-#compute_ncp(n, beta_1, m_matrix_1, sigma_matrix_1)
+#' @examples compute_ncp(x, beta_1, m_matrix_1, sigma_matrix_1)
 
 
 compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
@@ -41,3 +40,4 @@ compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
                        t(solve(m_matrix))) %*% 
                beta))
 }
+

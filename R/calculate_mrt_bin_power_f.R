@@ -15,6 +15,10 @@
 #' @param n             Number of participants
 #'
 #' @return              Power of the test.
+#' @importFrom          stats qf pf
+#'
+#' @return              Power of the test for fixed null/alternative and sample
+#'   size.
 #' @export
 #'
 #' @examples
