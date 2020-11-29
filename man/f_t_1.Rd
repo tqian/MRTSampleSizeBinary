@@ -3,17 +3,17 @@
 \docType{data}
 \name{f_t_1}
 \alias{f_t_1}
-\title{Lin eff}
+\title{A matrix defining the alternative hypothesis.}
 \format{
-a 2 by 10 matrix defining a linear effect
+a 2 by 10 matrix
 \describe{
-vector for the null
+In this example it is a log-linear trend.
 }
 }
 \usage{
 f_t_1
 }
 \description{
-Lin eff
+A matrix defining the alternative hypothesis.
 }
 \keyword{datasets}
