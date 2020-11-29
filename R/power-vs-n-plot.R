@@ -52,11 +52,6 @@ power_vs_n_plot <- function(avail_pattern,
   
   
   
-  # plot(n_vec, 
-  #      power_vec,
-  #      main = "Power and Sample Size", 
-  #      xlab = "Sample Size", 
-  #      ylab = "Power", 
-  #      ylim = c(0 , 1))
+
 }
 

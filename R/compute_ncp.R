@@ -11,7 +11,7 @@
 #'   variable.
 #' @export
 #' 
-#' @examples compute_ncp(x, beta_1, m_matrix_1, sigma_matrix_1)
+#' @examples compute_ncp(300, beta_1, m_matrix_1, sigma_matrix_1)
 
 
 compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
