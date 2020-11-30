@@ -13,6 +13,10 @@
 #' @param alpha         Defines success probability null curve together with g_t
 #' @param p_t           Randomization probability at each time point
 #' @param gamma         Desired Type I error
+#' @param min_n         Minimum of range of sample sizes to plot. Should be at
+#'   least as large as the sum of the dimensions of alpha and beta.
+#' @param max_n         Maximum of range of sample sizes to plot. Should be at
+#'   least as large as min_n.
 #'
 #' @return              Plot of power and sample size
 #' @export
@@ -26,30 +30,39 @@ power_vs_n_plot <- function(avail_pattern,
                                      beta,
                                      alpha,
                                      p_t,
-                                     gamma
+                                     gamma,
+                                     min_n=min_samp(alpha, beta),
+                                     max_n=max_samp(min_n)
                                      )
 {
   
-  min_n <- length(beta) + length(alpha)
-  n_vec <- c(seq(min_n +1, min_n + 1000, by = 1))
+  if(min_n >= max_n) {
+    stop("min_n should be greater than max_n")
+  }
+  
+  if(min_n < length(beta) + length(alpha)){
+    stop("min_n is too small")
+  }
+  
+  #min_n <- length(beta) + length(alpha)
+  n_vec <- c(seq(min_n +1, max_n, by = 1))
   l <- length(n_vec)
   power_vec <- c(rep(NA, l))
   
   for (n_i in n_vec){
     indx <- which(n_vec == n_i)
-   power_vec[indx] <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma,n_i)
+    power_vec[indx] <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, 
+                                                 beta, alpha, p_t, gamma,n_i)
  
   }
-  #power_vec
-  #n_vec
+
   power_n_data <- data.frame(power_vec, n_vec)
-  #power_n_data
-  # length(power_vec)
+
   
   ggplot(power_n_data)+
-    geom_line(aes(x = power_vec, y = n_vec), color = "blue")+
+    geom_line(aes(y = power_vec, x = n_vec), color = "blue")+
     ggtitle("Power vs. Sample Size") +
-    xlab("Power") + ylab("Sample Size")
+    xlab("Sample Size") + ylab("Power")
   
   
   
