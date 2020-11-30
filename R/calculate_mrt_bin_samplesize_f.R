@@ -1,5 +1,5 @@
-#' Returns sample size needed to achieve a specified power in the context of a
-#' binary MRT.
+#' Returns sample size needed to achieve a specified power in the context of an
+#' MRT with binary outcomes.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point

@@ -2,8 +2,8 @@
 % Please edit documentation in R/calculate_mrt_bin_power_f.R
 \name{calculate_mrt_bin_power_f}
 \alias{calculate_mrt_bin_power_f}
-\title{Returns power of a test given a prespecified sample size in the context of a
-binary MRT.}
+\title{Returns power of a test given a prespecified sample size in the context of an
+MRT with binary outcomes.}
 \usage{
 calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma, n)
 }
@@ -33,8 +33,8 @@ Power of the test for fixed null/alternative and sample
   size.
 }
 \description{
-Returns power of a test given a prespecified sample size in the context of a
-binary MRT.
+Returns power of a test given a prespecified sample size in the context of an
+MRT with binary outcomes.
 }
 \examples{
            calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1,

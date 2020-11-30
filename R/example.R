@@ -19,10 +19,10 @@
 "g_t_1"
 
 
-#' A vector of probabilities for each time point.  
+#' A vector of randomization probabilities for each time point.  
 #' @format a length T vector
 #' \describe{
-#' vectro of probs
+#' Vector of randomization probabilities. 
 #' }
 "p_t_1"
 

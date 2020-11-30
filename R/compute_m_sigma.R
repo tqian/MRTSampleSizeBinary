@@ -1,6 +1,8 @@
 #' Computes "M" and "Sigma" matrices for the sandwich estimator of
-#' variance-covariance matrix. Primarily a helper function for
-#' calculate_mrt_bin_power_f and calculate_mrt_bin_samplesize_f.
+#' variance-covariance matrix. 
+#' 
+#' Primarily a helper function for
+#' calculate_mrt_bin_power_f() and calculate_mrt_bin_samplesize_f().
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point

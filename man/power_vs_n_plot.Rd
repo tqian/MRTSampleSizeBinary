@@ -2,7 +2,8 @@
 % Please edit documentation in R/power-vs-n-plot.R
 \name{power_vs_n_plot}
 \alias{power_vs_n_plot}
-\title{Returns a plot of power vs sample size in the context of MRT}
+\title{Returns a plot of power vs sample size in the context of a binary outcome
+MRT.}
 \usage{
 power_vs_n_plot(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma)
 }
@@ -29,7 +30,8 @@ alternative together with g_t}
 Plot of power and sample size
 }
 \description{
-Returns a plot of power vs sample size in the context of MRT
+Returns a plot of power vs sample size in the context of a binary outcome
+MRT.
 }
 \examples{
            power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,

@@ -3,17 +3,17 @@
 \docType{data}
 \name{p_t_1}
 \alias{p_t_1}
-\title{A vector of probabilities for each time point.}
+\title{A vector of randomization probabilities for each time point.}
 \format{
 a length T vector
 \describe{
-vectro of probs
+Vector of randomization probabilities. 
 }
 }
 \usage{
 p_t_1
 }
 \description{
-A vector of probabilities for each time point.
+A vector of randomization probabilities for each time point.
 }
 \keyword{datasets}

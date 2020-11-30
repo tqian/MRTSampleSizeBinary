@@ -5,12 +5,10 @@
 #' or equal to 10 is sufficient to attain the desired power, the calculator does
 #' not output the exact sample size but produces an error message, because in
 #' this situation the sample size result may not be as accurate. In general,
-#' when the output sample size is small, one might reconsider the following: 
-#' (1) whether you are correctly or conservatively guessing the average of expected
-#' availability, 
-#' (2) whether the duration of study is too long, 
-#' (3) whether the treatment effect is overestimated, and 
-#' (4) whether the power is set too low.
+#' when the output sample size is small, one might reconsider the following: (1)
+#' whether you are correctly or conservatively guessing the average of expected
+#' availability, (2) whether the duration of study is too long, (3) whether the
+#' treatment effect is overestimated, and (4) whether the power is set too low.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
@@ -31,7 +29,7 @@
 #'   user-specified power values.
 #' @export
 #'
-#' @examples            power_summary(tau_t_1, f_t_1, g_t_1, 
+#' @examples            power_summary(tau_t_1, f_t_1, g_t_1,
 #'                                    beta_1, alpha_1, p_t_1, 0.05)
 power_summary <- function(avail_pattern,  
                           f_t,             

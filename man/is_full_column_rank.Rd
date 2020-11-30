@@ -13,7 +13,7 @@ is_full_column_rank(mat)
 Boolean TRUE/FALSE for if matrix is full column rank.
 }
 \description{
-Check if a matrix is full column rank.
+Used in checking if p_t*f_t is in linear span of g_t.
 }
 \examples{
   is_full_column_rank(diag(4))

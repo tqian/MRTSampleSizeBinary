@@ -1,5 +1,5 @@
-#' Returns power of a test given a prespecified sample size in the context of a
-#' binary MRT.
+#' Returns power of a test given a prespecified sample size in the context of an
+#' MRT with binary outcomes.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
