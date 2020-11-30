@@ -70,19 +70,6 @@ of proximal treatment effects.
 
 We load a set of data created beforehand for illustration:
  
-```{r}
-# 
-# data(tau_t_1)
-# data(alpha_1) 
-# data(beta_1)
-# data(f_t_1)
-# data(g_t_1)
-# data(m_matrix_1)
-# data(p_t_1)
-# data(sigma_matrix_1)
-
-```
-
 
 *tau_t_1*: Vector of length T that holds the average availability at each time
 point.
