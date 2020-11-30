@@ -18,9 +18,9 @@ alternative together with beta}
 alpha}
 
 \item{beta}{Defines marginal excursion effect MEE(t) under
-alternative together with g_t}
+alternative together with f_t}
 
-\item{alpha}{Defines success probability null curve together with f_t}
+\item{alpha}{Defines success probability null curve together with g_t}
 
 \item{p_t}{Randomization probability at each time point}
 

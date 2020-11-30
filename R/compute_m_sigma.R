@@ -11,9 +11,9 @@
 #' @param g_t           Defines success probability null curve together with
 #'   alpha. Assumed to be matrix of size T*q.
 #' @param beta          Length p vector that defines marginal excursion effect
-#'   MEE(t) under alternative together with g_t.
+#'   MEE(t) under alternative together with f_t.
 #' @param alpha         Length q vector that defines success probability null
-#'   curve together with f_t.
+#'   curve together with g_t.
 #' @param p_t           Length T vector of randomization probabilities at each time point
 #' @return              List containing two matrices. The first is the M matrix
 #'   and the second is the Sigma matrix.

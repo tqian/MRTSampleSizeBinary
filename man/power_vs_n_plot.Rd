@@ -5,7 +5,17 @@
 \title{Returns a plot of power vs sample size in the context of a binary outcome
 MRT.}
 \usage{
-power_vs_n_plot(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma)
+power_vs_n_plot(
+  avail_pattern,
+  f_t,
+  g_t,
+  beta,
+  alpha,
+  p_t,
+  gamma,
+  min_n = min_samp(alpha, beta),
+  max_n = max_samp(min_n)
+)
 }
 \arguments{
 \item{avail_pattern}{A vector of length T that is the average availability at
@@ -18,13 +28,19 @@ alternative together with beta}
 alpha}
 
 \item{beta}{Defines marginal excursion effect MEE(t) under
-alternative together with g_t}
+alternative together with f_t}
 
-\item{alpha}{Defines success probability null curve together with f_t}
+\item{alpha}{Defines success probability null curve together with g_t}
 
 \item{p_t}{Randomization probability at each time point}
 
 \item{gamma}{Desired Type I error}
+
+\item{min_n}{Minimum of range of sample sizes to plot. Should be
+greater than the sum of the dimensions of alpha and beta.}
+
+\item{max_n}{Maximum of range of sample sizes to plot. Should be
+greater than min_n.}
 }
 \value{
 Plot of power and sample size
