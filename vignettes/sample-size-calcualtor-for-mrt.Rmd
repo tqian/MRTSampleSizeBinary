@@ -98,7 +98,7 @@ If the investigator would like to calculate power based on some suggested sample
 calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05, 300)
 
 ```
-Based on the fraction of power calculated above, the user can employ this information to trade off/ make the decision on power vs. sample size. This decision can be costly, and so having a visulization of this relationship between power and sample size can be beneficial. 
+Based on the fraction of power calculated above, the user can employ this information to trade off/ make the decision on power vs. sample size. This decision can be costly, and so having a visualization of this relationship between power and sample size can be beneficial. 
 
 Thus, the package provides a visualization of this relationship and so we recommend the user to use to following function :
 
@@ -108,8 +108,10 @@ power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05)
 
 ```
 
+
+Another way to look at this information that quantifies power in relation to sample size, is by looking at a list of specific powers and the sample size needed to achieve it. This package offeres a power-summary function that considers sample sizes for power ranging from 0.6 to 0.95.
 ```{r}
- power_summary(tau_t_1, f_t_1, g_t_1,beta_1, alpha_1, p_t_1, 0.05)
+power_summary(tau_t_1, f_t_1, g_t_1,beta_1, alpha_1, p_t_1, 0.05)
 ```
 
 
