@@ -102,10 +102,6 @@ Based on the fraction of power calculated above, the user can employ this inform
 
 Thus, the package provides a visualization of this relationship and so we recommend the user to use to following function :
 
-```{r powe-plot, fig.align='center', fig.width= , fig.height=6}
-power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05, 6, 600)
-
-```
 
 
 ```{r}
