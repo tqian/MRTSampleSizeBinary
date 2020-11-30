@@ -1,9 +1,9 @@
 ---
-title: "Sample Size Calculator for Micro Randomized Trials"
+title: "Sample Size Calculator for Micro-Randomized Trials"
 author: "Thabat Dahdoul, Eliot Wong-Toi"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{sample-size-calcualtor-for-mrt}
+  %\VignetteIndexEntry{Sample Size Calculator for Micro-Randomized Trials}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   
@@ -23,7 +23,7 @@ library(mrtbincalc)
 
 # Introduction 
 The **mrtbincalc** package provides a sample size calculator for
-Micro-Randomized Trials (MRT) with binary outcomes. The sample size formula is
+micro-randomized trials (MRT) with binary outcomes. The sample size formula is
 developed in ["Sample Size Considerations for Micro-Randomized Trials with
 Binary Outcome"](https://sites.google.com/view/tianchen-qian/research) by E.
 Cohn, T. Qian, and S. Murphy. This calculator can provide the sample size needed
