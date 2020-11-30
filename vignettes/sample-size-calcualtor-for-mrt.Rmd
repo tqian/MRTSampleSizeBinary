@@ -1,5 +1,6 @@
 ---
 title: "Sample Size Calculator for Micro Randomized Trials"
+author: "Thabat Dahdoul, Eliot Wong-Toi"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{sample-size-calcualtor-for-mrt}
@@ -21,7 +22,7 @@ library(mrtbincalc)
 ```
 
 # Introduction 
-The \texttt{mrtbincalc} package provides a sample size calculator for
+The **mrtbincalc** package provides a sample size calculator for
 Micro-Randomized Trials (MRT) with binary outcomes. The sample size formula is
 developed in ["Sample Size Considerations for Micro-Randomized Trials with
 Binary Outcome"](https://sites.google.com/view/tianchen-qian/research) by E.
@@ -41,7 +42,6 @@ exercise, the proximal outcome is the step count in the subsequent 30 minutes
 
 
 # Quick Start
-
 This section provides examples of how to use this package. It allows the user to
 see the basic operations and what the outputs would look like. The functions in
 this package rely on the some specific information from the MRT set up, such as
@@ -70,7 +70,7 @@ this work, we only consider the binary treatment. One needs to provide the trend
 of proximal treatment effects.
 
 
-Our computation of the required sample size/power relies on a test statistic
+The computation of the required sample size/power relies on a test statistic
 that is distributed as a non-central $F$ with $p, n-q-p$ degrees of freedom
 under the alternative hypothesis. For specifics about this see @pan2002small.
  
@@ -84,14 +84,14 @@ The following data is included in the package and will be used to illustrate
 some of the functions in this package:
  
 
-*tau_t_1*: Vector of length 10 that holds the average availability at each time
+`tau_t_1`: Vector of length 10 that holds the average availability at each time
 point. In this example the availability remains constant across decision points.
 ```{r}
 tau_t_1
 ```
 
 
-*f_t_1*: A 2 by 10 matrix defining the alternative hypothesis. In this example
+`f_t_1`: A 2 by 10 matrix defining the alternative hypothesis. In this example
 it is a log-linear trend. Each row corresponds to a decision point (in this
 example we have 10).
 ```{r}
@@ -99,14 +99,14 @@ f_t_1
 ```
 
 
-*g_t_1*: A 2 by 10 matrix defining the null hypothesis.In this example it is a
+`g_t_1`: A 2 by 10 matrix defining the null hypothesis.In this example it is a
 log-linear trend. As with `f_t_1`, each row corresponds to a decision point.
 ```{r}
 g_t_1
 ```
 
 
-*p_t_1*: A length 10 vector of randomization probabilities for each time point. 
+`p_t_1`: A length 10 vector of randomization probabilities for each time point. 
 This example has the randomization probability staying constant across decision 
 points.
 ```{r}
@@ -114,7 +114,7 @@ p_t_1
 ```
 
 
-*beta_1*: Vector that defines the alternative hypothesis.The matrix
+`beta_1`: Vector that defines the alternative hypothesis.The matrix
 multiplication of this vector with f_t_1 defines the MEE under the alternative
 hypothesis.
 ```{r}
@@ -122,7 +122,7 @@ beta_1
 ```
 
 
-*alpha_1* : A length of 2 vector that defines the null hypothesis.The matrix
+`alpha_1`: A length of 2 vector that defines the null hypothesis.The matrix
 multiplication of this vector with g_t_1 defines the MEE under the null
 hypothesis.
 ```{r}
@@ -130,7 +130,7 @@ alpha_1
 ```
 
 ## Examples
-
+### `calculate_mrt_bin_samplesize_f()`
 Below we compute the required sample size for an MRT with the above data to
 achieve $0.8$ power. The argument `gamma` is the type I error rate, `b` is the
 type II error rate ($1-power$), and `exact` is a flag for if the function should
@@ -147,7 +147,7 @@ calculate_mrt_bin_samplesize_f(avail_pattern=tau_t_1,
                                exact=FALSE)
 ```
 
-
+### `calculate_mrt_bin_power_f()`
 If the investigator would like to calculate power based on a fixed sample size
 that is feasible in the study, with a specified significance level, then they
 can use the `calculate_mrt_bin_power_f()` function. The first seven arguments
@@ -164,6 +164,7 @@ calculate_mrt_bin_power_f(avail_pattern=tau_t_1,
                           gamma=0.05, 
                           n=275)
 ```
+### `power_vs_n_plot()`
 Based on the fraction of power calculated above, the user can employ this
 information to trade off/make the decision on power vs. sample size. This
 decision can be costly, and so having a visualization of this relationship
@@ -182,7 +183,7 @@ power_vs_n_plot(avail_pattern=tau_t_1,
                 gamma=0.05)
 ```
 
-
+### `power_summary()`
 Another way to look at this information that quantifies power in relation to
 sample size, is by looking at a list of specific powers and the sample size
 needed to achieve it. This package offers a `power_summary()` function that
