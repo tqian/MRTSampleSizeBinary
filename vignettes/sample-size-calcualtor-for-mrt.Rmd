@@ -79,7 +79,7 @@ compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1)
 ```
 
 
- Since the package relies on a test statistic that is distributed as a non-central chi-squared with p degrees of freedom under the alternative hypothesis. The test is to find significance of the marginal excursion effect between the available intervention and the control groups were considered for randomization .@pan2002small
+ Since the package relies on a test statistic that is distributed as a non-central chi-squared with p degrees of freedom under the alternative hypothesis. The test is to find significance of the marginal excursion effect between the available intervention and the control groups were considered for randomization.@pan2002small
  
  Then the following function can calculate the non central parameter of the test statistic. This function needs the estimated co-varince matrix that we have seen above and a sample size. 
  
