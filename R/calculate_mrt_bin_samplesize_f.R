@@ -35,14 +35,19 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
 {
     pts <- length(avail_pattern)
     
+    if(!(is.matrix(f_t)) | !(is.matrix(g_t))){
+        stop("f_t and g_t should be matrices")
+    }
+    
     dim_vec <- c(dim(f_t)[1], dim(g_t)[1], length(p_t))
     
     if(!all(dim_vec == pts)){
         stop("All arguments must agree on number of time points.")
     }
     
+    
     if(dim(f_t)[2] > dim(g_t)[2]){
-        warning("f should lie in span of g")
+        warning("p_t \times f_t should lie in span of g_t")
     }
     
     if(dim(f_t)[2] != length(beta)) {

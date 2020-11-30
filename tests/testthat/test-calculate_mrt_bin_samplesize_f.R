@@ -135,7 +135,7 @@ test_that(
     expect_warning(
       calculate_mrt_bin_samplesize_f(tau_t, f_new, g_t, beta_new, 
                                      alpha, p_t, gamma, b, TRUE),
-      "f should lie in span of g")
+      "p_t \times f_t should lie in span of g_t")
   }
 )
 
@@ -188,5 +188,25 @@ test_that(
       calculate_mrt_bin_samplesize_f(tau_t, f_t, g_t, beta, 
                                      alpha, p_t, gamma, 100*b, TRUE),
       "b, type II error, should be between 0 and 1")
+  }
+)
+
+test_that(
+  "test for incorrect type of f_t",
+  {
+    expect_error(
+      calculate_mrt_bin_samplesize_f(tau_t, c(1,3,0), g_t, beta, 
+                                     alpha, p_t, gamma, 100*b, TRUE),
+      "f_t and g_t should be matrices")
+  }
+)
+
+test_that(
+  "test for incorrect type of g_t",
+  {
+    expect_error(
+      calculate_mrt_bin_samplesize_f(tau_t, f_t, 0, beta, 
+                                     alpha, p_t, gamma, 100*b, TRUE),
+      "f_t and g_t should be matrices")
   }
 )
