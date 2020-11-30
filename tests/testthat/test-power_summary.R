@@ -1,5 +1,4 @@
 # generate data for tests -------------------------------------------------
-# TQ added
 set.seed(1)
 
 

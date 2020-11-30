@@ -1,13 +1,9 @@
-# simulate vals for tests -------------------------------------------------
-# TQ added
+# generate vals for tests -------------------------------------------------
 set.seed(1)
 
 
 
 total_dp <- 10 # total number of decision points
-# p and q are not directly used in the function, so I commented them out.
-# p <- 2
-# q <- 2
 
 # expected availability E(I_t) for t = 1,...,total_dp
 tau_t <- rep(0.8, total_dp) 
@@ -58,11 +54,11 @@ mee_t <- f_t %*% beta # MEE(t) for t = 1,...,total_dp
 mu1_t <- mu0_t * exp(mee_t) 
 
 
-
+# make matrices for quadratic tests
 g_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2)
 alpha_new <- as.matrix(c(-0.2, -0.1, .01), ncol = 1)
 
-f_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2) # f_t = (1, t)
+f_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2)
 beta_new <- as.matrix(c(0.15, - 0.01, -.1), ncol = 1)
 
 
