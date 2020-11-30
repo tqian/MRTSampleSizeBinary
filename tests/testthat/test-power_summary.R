@@ -1,7 +1,4 @@
-library(testthat)
-
-
-# simulate data for tests -------------------------------------------------
+# generate data for tests -------------------------------------------------
 # TQ added
 set.seed(1)
 
