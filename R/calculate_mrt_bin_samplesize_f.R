@@ -48,7 +48,7 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     
     
     if(dim(f_t)[2] > dim(g_t)[2]){
-        warning("p_t \times f_t should lie in span of g_t")
+        warning("p_t * f_t should lie in span of g_t")
     }
     
     if(dim(f_t)[2] != length(beta)) {
@@ -86,7 +86,7 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     for (icol in 1:ncol(f_t)) {
         if (is_full_column_rank(cbind(p_t * f_t[, icol], g_t))) {
             # p_t * f_t[, icol] is not in the linear span of g_t
-            warning(paste0("p_t \times f_t[, ", icol, 
+            warning(paste0("p_t * f_t[, ", icol, 
                            "] is not in the linear span of g_t."))
             lincombo_flag <- TRUE
         }
@@ -94,7 +94,7 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     
     ## towards the end of the main function execution
     if (lincombo_flag) {
-        warning("p_t \times f_t is not in the linear span of g_t,
+        warning("p_t * f_t is not in the linear span of g_t,
           so the sample size result can be inaccurate.\n
           Consider revising g_t.")
     }
