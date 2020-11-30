@@ -38,7 +38,7 @@ Another pre specified information that the user needs to provide is the success 
 
 Finally, the proximal treatment effect at each decision time point is defined as the mean difference in the proximal outcome between available people who are assigned a treatment versus available people who are not assigned treatment. In this work, we only consider the binary treatment. One needs to provide the trend of proximal treatment effects. 
 
- We load a set of data created beforehand for illustration:
+We load a set of data created beforehand for illustration:
  
 ```{r}
 # 
@@ -62,13 +62,13 @@ Finally, the proximal treatment effect at each decision time point is defined as
 
 *p_t_1*: A length T vector of randomization probabilities for each time point.  
 
-*beta_1* :Vector that defines the alternative hypothesis.The matrix multiplication of this vector with f_t_1 defines the MEE under the alternative hypothesis.
+*beta_1*: Vector that defines the alternative hypothesis.The matrix multiplication of this vector with f_t_1 defines the MEE under the alternative hypothesis.
 
 *alpha_1* : A length of 2 vector that defines the null hypothesis.The matrix multiplication of this vector with g_t_1 defines the MEE under the null hypothesis.
 
-*sigma_matrix_1* : An example matrix for "meat" of sandwich estimator of variance.
+*sigma_matrix_1*: An example matrix for "meat" of sandwich estimator of variance.
 
-*m_matrix_1* :An example matrix for "bread" of sandwich estimator of variance.
+*m_matrix_1*: An example matrix for "bread" of sandwich estimator of variance.
 
 
 If the uses is interested in calculating the estimated variance matrix, we can use   
@@ -79,7 +79,7 @@ compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1)
 ```
 
 
- Since the package relies on a test statistic that is distributed as a non-central chi-squared with p degrees of freedom under the alternative hypothesis. The test is to find significance of the marginal excursion effect between the available intervention and the control groups were considered for randomization .@pan2002small
+ Since the package relies on a test statistic that is distributed as a non-central chi-squared with p degrees of freedom under the alternative hypothesis. The test is to find significance of the marginal excursion effect between the available intervention and the control groups were considered for randomization @pan2002small.
  
  Then the following function can calculate the non central parameter of the test statistic. This function needs the estimated co-varince matrix that we have seen above and a sample size. 
  
