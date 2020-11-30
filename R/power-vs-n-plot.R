@@ -37,7 +37,7 @@ power_vs_n_plot <- function(avail_pattern,
 {
   
   if(min_n >= max_n) {
-    stop("min_n should be greater than max_n")
+    stop("max_n should be greater than min_n")
   }
   
   if(min_n < length(beta) + length(alpha)){
