@@ -8,8 +8,8 @@
 #' @param g_t           Defines success probability null curve together with
 #'   alpha
 #' @param beta          Defines marginal excursion effect MEE(t) under
-#'   alternative together with g_t
-#' @param alpha         Defines success probability null curve together with f_t
+#'   alternative together with f_t
+#' @param alpha         Defines success probability null curve together with g_t
 #' @param p_t           Randomization probability at each time point
 #' @param gamma         Desired Type I error
 #' @param n             Number of participants
