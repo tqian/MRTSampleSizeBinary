@@ -21,7 +21,7 @@ library(mrtbincalc)
 # Introduction 
 The *mrtbincalc* provides a sample size calculator for Micro-Randomized Trials (MRT) with binary outcomes. The sample size formula is developed in sample size considerations for MRT with Binary Outcome. This package provides the optimum sample size needed for a specified power, and the desired significance level in the context of MRT.
 
-In an MRT, each participant is repeatedly randomized among multiple options of an intervention (no intervention is usually one of the options), usually hundreds or thousands of times throughout the trial. The prefix “micro” reflects the frequent randomization on each participant. After each of such times (called a decision point), a near-term, proximal outcome is measured, which is typically an outcome that the intervention is directly targeting. For example, in a study where the intervention is a push notification suggesting a near-term physical exercise, the proximal outcome is the step count in the subsequent 30 minutes (Klasnja et al., 2015).
+In an MRT, each participant is repeatedly randomized among multiple options of an intervention (no intervention is usually one of the options), usually hundreds or thousands of times throughout the trial. The prefix “micro” reflects the frequent randomization on each participant. After each of such times (called a decision point), a near-term, proximal outcome is measured, which is typically an outcome that the intervention is directly targeting. For example, in a study where the intervention is a push notification suggesting a near-term physical exercise, the proximal outcome is the step count in the subsequent 30 minutes @klasnja2020quality.
 
 
 # Quick Start
@@ -77,7 +77,9 @@ compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1)
 ```
 
 
- Since the package relies on a test statistic that is distributed as a non-central chi-squared with p degrees of freedom under the alternative hypothesis. The test is to find significance of the marginal excursion effect between the available intervention and the control groups were considered for randomization. Then the following function can calculate the non central parameter of the test statistic. This function needs the estimated co-varince matrix that we have seen above and a sample size. 
+ Since the package relies on a test statistic that is distributed as a non-central chi-squared with p degrees of freedom under the alternative hypothesis. The test is to find significance of the marginal excursion effect between the available intervention and the control groups were considered for randomization .@pan2002small
+ 
+ Then the following function can calculate the non central parameter of the test statistic. This function needs the estimated co-varince matrix that we have seen above and a sample size. 
  
 ```{r}
 compute_ncp(300, beta_1, m_matrix_1, sigma_matrix_1)
@@ -113,6 +115,8 @@ Another way to look at this information that quantifies power in relation to sam
 ```{r}
 power_summary(tau_t_1, f_t_1, g_t_1,beta_1, alpha_1, p_t_1, 0.05)
 ```
+
+
 
 
 
