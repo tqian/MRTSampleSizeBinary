@@ -25,31 +25,58 @@ In an MRT, each participant is repeatedly randomized among multiple options of a
 minutes (Klasnja et al., 2015).
 
 
-# Installation 
-
-Note sure what to put for this section 
 
 
 
 # Quick Start
-This document provides examples of the use of this package. It relies on the some specific information from the MRT set up, such as the duration of the study in days, the number of decision time points within each day , and the randomization probability.That is, the probability of assigning the treatment at a decision time point. 
+
+This section provides examples of the use of this package, and see the basic operations and what the outputs would look like. 
+
+This package, relies on the some specific information from the MRT set up, such as the duration of the study in days, the number of decision time points within each day , and the randomization probability.That is, the probability of assigning the treatment at a decision time point. 
+
+Since in an MRT treatment can only be provided when an individual is available; The expected availability is the probability a person is available to receive the intervention at the decision times. To use this package, you need to select a time-varying pattern for the expected availability. There are tow patterns you can choose from: constant, or linear over decision points.
 
 
+Another pre specified information that is the user needs to provide is the success probability null curve at each decision time point. It is defined as the probability of the proximal outcome equal to 1 for available individuals who are not assigned treatment. The user need to provide the trend of success probability of the null curve. This could be either constant or linear over decision points.
 
-To illustrate, we provide an example of such input:
+
+Finally, the proximal treatment effect at each decision time point is defined as the mean difference in the proximal outcome between available people who are assigned a treatment versus available people who are not assigned treatment. In this work, we only consider the binary treatment. One needs to provide the trend of proximal treatment effects. This could be either constant or time-varying, e.g. linear or quadratic over decision points.
+
+To illustrate , consider the following variables : 
+
+*tau_t_1*: Vector of length T that holds the average availability at each time point.
+
+*f_t_1*: A 2 by 10 matrix defining the alternative hypothesis. In this example it is a log-linear trend.
+
+*g_t_1*: A 2 by 10 matrix defining the null hypothesis.In this example it is a log-linear trend.
+
+*p_t_1*: A  length T vector of randomization probabilities for each time point.  
+
+*beta_1* :Vector that defines the alternative hypothesis.The matrix multiplication of this vector with f_t_1 defines the MEE under the alternative hypothesis.
+
+*alpha_1* : A length of 2 vector that defines the null hypothesis.The matrix multiplication of this vector with g_t_1 defines the MEE under the null hypothesis.
+
+*sigma_matrix_1* : An example matrix for "meat" of sandwich estimator of variance.
+
+*m_matrix_1* :An example matrix for "bread" of sandwich estimator of variance.
+
+
+If the uses is interested in calculating the estimated variance matrix, we can use   
 
 ```{r}
 
-set.seed(1)
-total_decision_points <- 10
-expected_availability <- rep(0.8, 10)  
-rand_prob_at_time_point <- rep(0.4, 10) 
-type_I_error <- 0.05 
-type_II_error <- 0.2 
+compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1)
+```
+
+
+
+
+```{r}
+
 
 calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05, .2, FALSE)
+
 calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05, 100)
-compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1)
 compute_ncp(300, beta_1, m_matrix_1, sigma_matrix_1)
 power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05)
 #power_summary(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05)
@@ -59,39 +86,15 @@ power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1, p_t_1, 0.05)
 * Minimum ample size for the desired power level* 
 
 ```{r}
-# ### specify g_t and alpha ###
-# g_t_1 <- cbind(rep(1, total_dp), 1:total_dp)  
-# alpha_1 <- as.matrix(c(-0.2, -0.1), ncol = 1)
-# 
-# # checking that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 0) should always be between 0 and 1.
-# mu0_t<- exp(g_t_1 %*% alpha_1) # E(Y_{t+1} = 1 | I_t = 1, A_t = 0) for t = 1,...,total_dp
-# #mu0_t_1 # look at the mu0_t values
-# stopifnot(all(mu0_t < 1) & all(mu0_t > 0))
-# 
-# ### specify f_t and beta ###
-# f_t_1 <- cbind(rep(1, total_dp), 1:total_dp)  # f_t = (1, t)
-# beta_1 <- as.matrix(c(0.15, - 0.01), ncol = 1)
-# 
-# # checking that probability E(Y_{t+1} = 1 | I_t = 1, A_t = 1) should always be between 0 and 1.
-# mee_t <- f_t_1 %*% beta_1 # MEE(t) for t = 1,...,total_dp
-# mu1_t <- mu0_t * exp(mee_t) # E(Y_{t+1} = 1 | I_t = 1, A_t = 1) for t = 1,...,total_dp
-# #mu1_t # look at the mu1_t values
-# stopifnot(all(mu1_t < 1) & all(mu1_t > 0))
+
 
 ```
 
 
 
-# Availability
-Treatment can only be provided when an individual is available; The expected availability is the probability a person is available to receive the intervention at the decision times.
-To use this package, you need to select a time-varying pattern for the expected availability. There are tow patterns you can choose from: constant, or linear over decision points.
 
-3. Success Probability Null Curve
-The Success Probability Null Curve at each decision time point is defined as the probability of the proximal outcome equal to 1 for available individuals who are not assigned treatment.
-You need to provide the trend of success probability null curve. This could be either constant or linear over decision points.
 
-4. Proximal Treatment Effect
-The Proximal Treatment Effect at each decision time point is defined as the mean difference in the proximal outcome between available people who are assigned a treatment versus available people who are not assigned treatment. In this work, we only consider the binary treatment. You need to provide the trend of proximal treatment effects. This could be either constant or time-varying, e.g. linear or quadratic over decision points.
+
 
 
 
