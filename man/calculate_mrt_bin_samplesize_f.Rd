@@ -28,10 +28,10 @@ alternative together with beta. Assumed to be matrix of size T*p.}
 alpha. Assumed to be matrix of size T*q.}
 
 \item{beta}{Length p vector that defines marginal excursion effect
-MEE(t) under alternative together with g_t.}
+MEE(t) under alternative together with f_t.}
 
 \item{alpha}{Length q vector that defines success probability null
-curve together with f_t.}
+curve together with g_t.}
 
 \item{p_t}{Length T vector of Randomization probabilities at each
 time point.}
