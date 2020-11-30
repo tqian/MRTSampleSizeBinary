@@ -106,6 +106,28 @@ test_that(
   }
 )
 
+# test warnings
+test_that(
+  "check example with invalid dimension f, g",
+  {
+    expect_warning(
+      calculate_mrt_bin_power_f(tau_t, f_new, g_t, beta_new, 
+                                alpha, p_t, gamma, 20))
+  }
+)
+
+f_warn <- cbind(rep(1, 10), rep(c(1,0), times=5))
+
+test_that(
+  "check for warning about p_t*f_t not being in span of g_t",
+  {
+    expect_warning(
+      calculate_mrt_bin_power_f(tau_t, f_warn, g_t, beta, 
+                                alpha, p_t, gamma, round(size2)))
+  }
+)
+
+# test errors
 test_that(
   "check that min sample size stops function",
   {
@@ -131,18 +153,7 @@ test_that(
 )
 
 
-# test warning
-test_that(
-  "check example with invalid dimension f, g",
-  {
-    expect_warning(
-      calculate_mrt_bin_power_f(tau_t, f_new, g_t, beta_new, 
-                                alpha, p_t, gamma, 20),
-      "p_t \times f_t should lie in span of g_t")
-  }
-)
 
-# test errors
 test_that(
   "check example with invalid dimension f and beta",
   {

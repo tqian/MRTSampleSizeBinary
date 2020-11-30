@@ -134,11 +134,20 @@ test_that(
   {
     expect_warning(
       calculate_mrt_bin_samplesize_f(tau_t, f_new, g_t, beta_new, 
-                                     alpha, p_t, gamma, b, TRUE),
-      "p_t \times f_t should lie in span of g_t")
+                                     alpha, p_t, gamma, b, TRUE))
   }
 )
 
+f_warn <- cbind(rep(1, 10), rep(c(1,0), times=5))
+
+test_that(
+  "check for warning about p_t*f_t not being in span of g_t",
+  {
+    expect_warning(
+      calculate_mrt_bin_samplesize_f(tau_t, f_warn, g_t, beta, 
+                                alpha, p_t, gamma, 0.4))
+  }
+)
 # test errors
 test_that(
   "check example with invalid dimension f and beta",
