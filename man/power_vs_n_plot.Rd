@@ -36,11 +36,11 @@ alternative together with f_t}
 
 \item{gamma}{Desired Type I error}
 
-\item{min_n}{Minimum of range of sample sizes to plot. Should be at
-least as large as the sum of the dimensions of alpha and beta.}
+\item{min_n}{Minimum of range of sample sizes to plot. Should be
+greater than the sum of the dimensions of alpha and beta.}
 
-\item{max_n}{Maximum of range of sample sizes to plot. Should be at
-least as large as min_n.}
+\item{max_n}{Maximum of range of sample sizes to plot. Should be
+greater than min_n.}
 }
 \value{
 Plot of power and sample size

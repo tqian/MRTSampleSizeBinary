@@ -13,10 +13,10 @@
 #' @param alpha         Defines success probability null curve together with g_t
 #' @param p_t           Randomization probability at each time point
 #' @param gamma         Desired Type I error
-#' @param min_n         Minimum of range of sample sizes to plot. Should be at
-#'   least as large as the sum of the dimensions of alpha and beta.
-#' @param max_n         Maximum of range of sample sizes to plot. Should be at
-#'   least as large as min_n.
+#' @param min_n         Minimum of range of sample sizes to plot. Should be
+#'   greater than the sum of the dimensions of alpha and beta.
+#' @param max_n         Maximum of range of sample sizes to plot. Should be
+#'   greater than min_n.
 #'
 #' @return              Plot of power and sample size
 #' @export
@@ -41,11 +41,12 @@ power_vs_n_plot <- function(avail_pattern,
   }
   
   if(min_n < length(beta) + length(alpha)){
-    stop("min_n is too small")
+    stop(strwrap("min_n is too small. min_n must be greater than the sum of 
+                 the dimensions of alpha and beta", exdent=1))
   }
   
   #min_n <- length(beta) + length(alpha)
-  n_vec <- c(seq(min_n +1, max_n, by = 1))
+  n_vec <- c(seq(min_n, max_n, by = 1))
   l <- length(n_vec)
   power_vec <- c(rep(NA, l))
   

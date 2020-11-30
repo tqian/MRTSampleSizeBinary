@@ -10,5 +10,5 @@
 #'
 #' @examples min_samp(alpha_1, beta_1)
 min_samp <- function(alph, bet){
-  return(length(alph) + length(bet))
+  return(length(alph) + length(bet) + 1)
 }
