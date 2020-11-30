@@ -4,7 +4,9 @@ set.seed(1)
 
 
 total_dp <- 10 # total number of decision points
-
+# p and q are not directly used in the function, so I commented them out.
+# p <- 2
+# q <- 2
 
 # expected availability E(I_t) for t = 1,...,total_dp
 tau_t <- rep(0.8, total_dp) 
@@ -55,7 +57,7 @@ mee_t <- f_t %*% beta # MEE(t) for t = 1,...,total_dp
 mu1_t <- mu0_t * exp(mee_t) 
 
 
-# make matrices for quadratic tests
+
 g_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2)
 alpha_new <- as.matrix(c(-0.2, -0.1, .01), ncol = 1)
 
@@ -63,21 +65,30 @@ f_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2) # f_t = (1, t)
 beta_new <- as.matrix(c(0.15, - 0.01, -.1), ncol = 1)
 
 
-# compute_m_sigma tests ---------------------------------------------------
+# power_summary tests -----------------------------------------------------
+
 test_that(
-  "check if first error check of invalid probabilities catches error",
+  "error check for low power",
   {
     expect_error(
-      compute_m_sigma(tau_t, f_t, -g_t, beta, alpha, p_t),
-      message="g_t and alpha values led to invalid probabilities")
+      power_summary(tau_t, f_t, g_t, beta, alpha, p_t, 0.05, c(0.000001)))
   }
 )
 
 test_that(
-  "check if second error check of invalid probabilities catches error",
+  "error check for negative power",
   {
     expect_error(
-      compute_m_sigma(tau_t, f_t, g_t, beta+1, alpha, p_t, gamma, b),
-      message="f_t and beta values led to invalid probabilities")
+      power_summary(tau_t, f_t, g_t, beta, alpha, p_t, 0.05, c(-0.000001)),
+      "Power should be between 0 and 1")
+  }
+)
+
+test_that(
+  "error check for too large power",
+  {
+    expect_error(
+      power_summary(tau_t, f_t, g_t, beta, alpha, p_t, 0.05, c(100, 100000)),
+      "Power should be between 0 and 1")
   }
 )

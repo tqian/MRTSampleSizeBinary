@@ -2,8 +2,8 @@
 % Please edit documentation in R/calculate_mrt_bin_samplesize_f.R
 \name{calculate_mrt_bin_samplesize_f}
 \alias{calculate_mrt_bin_samplesize_f}
-\title{Returns sample size needed to achieve a specified power in the context of a
-binary MRT.}
+\title{Returns sample size needed to achieve a specified power in the context of an
+MRT with binary outcomes.}
 \usage{
 calculate_mrt_bin_samplesize_f(
   avail_pattern,
@@ -46,10 +46,11 @@ time point.}
 Sample size to achieve desired power.
 }
 \description{
-Returns sample size needed to achieve a specified power in the context of a
-binary MRT.
+Returns sample size needed to achieve a specified power in the context of an
+MRT with binary outcomes.
 }
 \examples{
 calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, 
-beta_1, alpha_1, p_t_1, 0.05, .2, FALSE)
+                                         beta_1, alpha_1, p_t_1, 
+                                         0.05, .2, FALSE)
 }

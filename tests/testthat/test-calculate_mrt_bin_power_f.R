@@ -1,13 +1,9 @@
-# simulate vals for tests -------------------------------------------------
-# TQ added
+# generate vals for tests -------------------------------------------------
 set.seed(1)
 
 
 
 total_dp <- 10 # total number of decision points
-# p and q are not directly used in the function, so I commented them out.
-# p <- 2
-# q <- 2
 
 # expected availability E(I_t) for t = 1,...,total_dp
 tau_t <- rep(0.8, total_dp) 
@@ -58,11 +54,11 @@ mee_t <- f_t %*% beta # MEE(t) for t = 1,...,total_dp
 mu1_t <- mu0_t * exp(mee_t) 
 
 
-
+# make matrices for quadratic tests
 g_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2)
 alpha_new <- as.matrix(c(-0.2, -0.1, .01), ncol = 1)
 
-f_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2) # f_t = (1, t)
+f_new <- cbind(rep(1, total_dp), 1:total_dp, (1:total_dp)^2)
 beta_new <- as.matrix(c(0.15, - 0.01, -.1), ncol = 1)
 
 
@@ -101,11 +97,33 @@ test_that(
                                 alpha_new, p_t, gamma,
                                 calculate_mrt_bin_samplesize_f(
                                   tau_t, f_t, g_new, beta,
-                                  alpha_new, p_t, gamma, 1-1/pi, TRUE)),
-      1/pi, tolerance=.001)
+                                  alpha_new, p_t, gamma, 1-1/pi, FALSE)),
+      1/pi, tolerance=.01)
   }
 )
 
+# test warnings
+test_that(
+  "check example with invalid dimension f, g",
+  {
+    expect_warning(
+      calculate_mrt_bin_power_f(tau_t, f_new, g_t, beta_new, 
+                                alpha, p_t, gamma, 20))
+  }
+)
+
+f_warn <- cbind(rep(1, 10), rep(c(1,0), times=5))
+
+test_that(
+  "check for warning about p_t*f_t not being in span of g_t",
+  {
+    expect_warning(
+      calculate_mrt_bin_power_f(tau_t, f_warn, g_t, beta, 
+                                alpha, p_t, gamma, round(size2)))
+  }
+)
+
+# test errors
 test_that(
   "check that min sample size stops function",
   {
@@ -131,18 +149,7 @@ test_that(
 )
 
 
-# test warning
-test_that(
-  "check example with invalid dimension f, g",
-  {
-    expect_warning(
-      calculate_mrt_bin_power_f(tau_t, f_new, g_t, beta_new, 
-                                alpha, p_t, gamma, 20),
-      "f should lie in span of g")
-  }
-)
 
-# test errors
 test_that(
   "check example with invalid dimension f and beta",
   {
@@ -192,5 +199,25 @@ test_that(
       calculate_mrt_bin_power_f(tau_t, f_t, g_t, beta, 
                                 alpha, p_t, 'calc', 44),
       "gamma, type I error, should be between 0 and 1")
+  }
+)
+
+test_that(
+  "test for incorrect type of f_t",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, "test", g_t, beta, 
+                                alpha, p_t, 'calc', .44),
+      "f_t and g_t should be matrices")
+  }
+)
+
+test_that(
+  "test for invalid type I error",
+  {
+    expect_error(
+      calculate_mrt_bin_power_f(tau_t, f_t, pi, beta, 
+                                alpha, p_t, 'calc', .44),
+      "f_t and g_t should be matrices")
   }
 )

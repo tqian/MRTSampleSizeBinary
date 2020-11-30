@@ -3,8 +3,7 @@
 \name{compute_m_sigma}
 \alias{compute_m_sigma}
 \title{Computes "M" and "Sigma" matrices for the sandwich estimator of
-variance-covariance matrix. Primarily a helper function for
-calculate_mrt_bin_power_f and calculate_mrt_bin_samplesize_f.}
+variance-covariance matrix.}
 \usage{
 compute_m_sigma(avail_pattern, f_t, g_t, beta, alpha, p_t)
 }
@@ -31,11 +30,10 @@ List containing two matrices. The first is the M matrix
   and the second is the Sigma matrix.
 }
 \description{
-Computes "M" and "Sigma" matrices for the sandwich estimator of
-variance-covariance matrix. Primarily a helper function for
-calculate_mrt_bin_power_f and calculate_mrt_bin_samplesize_f.
+Primarily a helper function for
+calculate_mrt_bin_power_f() and calculate_mrt_bin_samplesize_f().
 }
 \examples{
            compute_m_sigma(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
-                       p_t_1)
+                                      p_t_1)
 }

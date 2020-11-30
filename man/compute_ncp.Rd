@@ -3,8 +3,7 @@
 \name{compute_ncp}
 \alias{compute_ncp}
 \title{Computes the non-centrality parameter for a an F distributed random variable
-in the context of a binary MRT. This is primarily a helper function for
-calculate_mrt_bin_power_f and calculate_mrt_bin_samplesize_f.}
+in the context of a MRT with binary outcome.}
 \usage{
 compute_ncp(x, beta, m_matrix, sigma_matrix)
 }
@@ -22,9 +21,8 @@ Returns non-centrality parameter for an F distributed random
   variable.
 }
 \description{
-Computes the non-centrality parameter for a an F distributed random variable
-in the context of a binary MRT. This is primarily a helper function for
-calculate_mrt_bin_power_f and calculate_mrt_bin_samplesize_f.
+This is primarily a helper function for
+calculate_mrt_bin_power_f() and calculate_mrt_bin_samplesize_f().
 }
 \examples{
 compute_ncp(300, beta_1, m_matrix_1, sigma_matrix_1)

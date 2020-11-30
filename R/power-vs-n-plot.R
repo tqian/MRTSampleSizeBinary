@@ -1,5 +1,6 @@
 
-#' Returns a plot of power vs sample size in the context of MRT
+#' Returns a plot of power vs sample size in the context of a binary outcome
+#' MRT.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
@@ -16,7 +17,7 @@
 #' @return              Plot of power and sample size
 #' @export
 #' @import ggplot2
-#' 
+#'
 #' @examples            power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
 #'                         p_t_1, 0.05)
 power_vs_n_plot <- function(avail_pattern,

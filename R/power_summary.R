@@ -1,5 +1,15 @@
 #' Reports the power of a binary outcome MRT at a range of power levels.
 #'
+#' The sample size calculator is based on an asymptotic result with a small
+#' sample correction. When the calculator finds out that a sample size less than
+#' or equal to 10 is sufficient to attain the desired power, the calculator does
+#' not output the exact sample size but produces an error message, because in
+#' this situation the sample size result may not be as accurate. In general,
+#' when the output sample size is small, one might reconsider the following: (1)
+#' whether you are correctly or conservatively guessing the average of expected
+#' availability, (2) whether the duration of study is too long, (3) whether the
+#' treatment effect is overestimated, and (4) whether the power is set too low.
+#'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
@@ -15,12 +25,12 @@
 #' @param gamma         Desired Type I error
 #' @param power_levels  Vector of powers to find sample size for.
 #'
-#' @return              Table containing needed sample size to achieve some
+#' @return              Dataframe containing needed sample size to achieve
 #'   user-specified power values.
 #' @export
 #'
-#' @examples            power_summary(tau_t_1, f_t_1, g_t_1, 
-#' beta_1, alpha_1, p_t_1, 0.05)
+#' @examples            power_summary(tau_t_1, f_t_1, g_t_1,
+#'                                    beta_1, alpha_1, p_t_1, 0.05)
 power_summary <- function(avail_pattern,  
                           f_t,             
                           g_t,             
@@ -30,9 +40,24 @@ power_summary <- function(avail_pattern,
                           gamma,
                           power_levels = seq(from=0.6, to=0.95, by=0.05)) {
   
-  if(!(all(power_levels > 0.5 & power_levels < 1))){
-    stop("Power should be between 0.5 and 1")
+  min_power <- min(power_levels)
+  max_power <- max(power_levels)
+  
+  ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
+                                         p_t, gamma, 10)
+  # check power is within (0,1)
+  if(max_power >=1 | min_power <= 0){
+    stop("Power should be between 0 and 1")
   }
+  
+  # make sure power is sufficiently large
+  if(min_power <= ten_power) {
+    stop(strwrap(paste0("The required sample size is <=10 to attain ", 
+                        min_power, 
+                        " power for this setting. See help(power_summary) for
+                        more details"), exdent=1))
+  }
+  
   
   power_size <- cbind(power=power_levels, sample_size=0)
   
@@ -42,5 +67,5 @@ power_summary <- function(avail_pattern,
                                                         1-power_levels[r])
   }
   
-  power_size
+  return(power_size)
 }
