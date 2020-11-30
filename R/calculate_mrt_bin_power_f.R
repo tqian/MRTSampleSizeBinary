@@ -15,7 +15,6 @@
 #' @param n             Number of participants
 #'
 #' @importFrom          stats qf pf
-#' @importFrom          limma is.fullrank
 #'
 #' @return              Power of the test for fixed null/alternative and sample
 #'   size.
@@ -65,7 +64,6 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
     stop("avail_pattern must have values between 0 and 1")
   }
   
-  
   p <- length(beta)
   q <- length(alpha)
   
@@ -76,21 +74,21 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
   if(n %% 1 != 0){
     warning("n should be an integer")
   }
-  
+
   # check that f_t is of full column rank
-  if(!is.fullrank(f_t)) {
+  if(!is_full_column_rank(f_t)) {
     stop("f_t has linearly dependent columns.")
   }
   
   # check that g_t is of full column rank
-  if(!is.fullrank(g_t)) {
+  if(!is_full_column_rank(g_t)) {
     stop("g_t has linearly dependent columns.")
   }
   
   # check that p_t * f_t is in the linear span of g_t
   lincombo_flag <- FALSE
   for (icol in 1:ncol(f_t)) {
-    if (is.fullrank(cbind(p_t * f_t[, icol], g_t))) {
+    if (is_full_column_rank(cbind(p_t * f_t[, icol], g_t))) {
       # p_t * f_t[, icol] is not in the linear span of g_t
       warning(paste0("p_t \times f_t[, ", icol, 
                      "] is not in the linear span of g_t."))
@@ -100,10 +98,11 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
   
   ## towards the end of the main function execution
   if (lincombo_flag) {
-    warning("p_t * f_t is not in the linear span of g_t,
+    warning("p_t \times f_t is not in the linear span of g_t,
           so the sample size result can be inaccurate.\n
           Consider revising g_t.")
   }
+  
   
   m_and_sigma <- compute_m_sigma(avail_pattern, f_t, g_t, beta, alpha, p_t)
   m_matrix <- m_and_sigma$m
