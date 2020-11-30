@@ -47,5 +47,5 @@ Reports the power of a binary outcome MRT at a range of power levels.
 }
 \examples{
            power_summary(tau_t_1, f_t_1, g_t_1, 
-beta_1, alpha_1, p_t_1, gamma_1)
+beta_1, alpha_1, p_t_1, 0.05)
 }
