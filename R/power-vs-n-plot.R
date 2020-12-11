@@ -60,10 +60,10 @@ power_vs_n_plot <- function(avail_pattern,
   power_n_data <- data.frame(power_vec, n_vec)
 
   
-  ggplot(power_n_data)+
+  return(ggplot(power_n_data)+
     geom_line(aes(y = power_vec, x = n_vec), color = "blue")+
     ggtitle("Power vs. Sample Size") +
-    xlab("Sample Size") + ylab("Power")
+    xlab("Sample Size") + ylab("Power"))
   
   
   
