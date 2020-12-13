@@ -3,7 +3,7 @@ title: "Sample Size Calculator for Micro-Randomized Trials"
 author: "Thabat Dahdoul, Eliot Wong-Toi"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Sample Size Calculator for Micro-Randomized Trials}
+  %\VignetteIndexEntry{Sample Size Calculator for Micro-Randomized Trials (MRTs)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   
@@ -23,22 +23,47 @@ library(mrtbincalc)
 
 # Introduction 
 The **mrtbincalc** package provides a sample size calculator for
-micro-randomized trials (MRT) with binary outcomes. The sample size formula is
-developed in ["Sample Size Considerations for Micro-Randomized Trials with
-Binary Outcome"](https://sites.google.com/view/tianchen-qian/research) by E.
-Cohn, T. Qian, and S. Murphy. This calculator can provide the sample size needed
-for a specified power, and can also be used to find the power given a sample
-size in the context of an MRT.
+micro-randomized trials (MRT) with binary outcomes. MRTs are an experimental design
+for optimizing mobile health interventions such as push notifications to increase physical activity.
+The sample size calculator is developed in @cohn2021sample.
+For a general overview of MRT, see @klasnja_microrandomized_2015 and @liao2016sample.
 
-In an MRT, each participant is repeatedly randomized among multiple options of
-an intervention (no intervention is usually one of the options), usually
-hundreds or thousands of times throughout the trial. The prefix “micro” reflects
-the frequent randomization on each participant. After each of such times (called
-a decision point), a near-term, proximal outcome is measured, which is typically
-an outcome that the intervention is directly targeting. For example, in a study
-where the intervention is a push notification suggesting a near-term physical
-exercise, the proximal outcome is the step count in the subsequent 30 minutes
-@klasnja2020quality.
+This calculator provides the sample size needed
+for a specified power to test for a nonzero marginal causal excursion effect of the
+mobile health intervention, and can also be used to find the power given a sample size. 
+
+Here we briefly review the hypothesis test that the sample size is calculated for.
+Let $(X_1, A_1, Y_2, X_2, A_2, Y_3, \ldots, X_m, A_m, Y_{m+1})$ denote the observed data
+from a participant in the MRT.
+$m$ denotes the total number of decision points.
+For each decision point $t$, $X_t$ denotes the time-varying covariate,
+$A_t$ denotes the treatment assignment,
+and $Y_{t+1}$ denotes the binary proximal outcome.
+We assume $A_t$ takes value in $\{0, 1\}$: For example, if the treatment is 
+a push notification, then $A_t = 0$ means the push notification is not delivered at $t$,
+and $A_t = 1$ means the push notification is delivered at $t$.
+Let $I_t$ denote the availability condition at $t$: $I_t = 1$ if the participant is
+available for treatment at $t$, and $I_t = 0$ if the participant is unavailable at $t$.
+
+For primary analysis of an MRT, one is usually interested in testing for a marginal causal
+excursion effect (MEE). Under standard causal assumptions, MEE at decision point $t$ can be expressed as
+$$
+\text{MEE}(t) = \log \frac{P(Y_{t+1} = 1 \mid A_t = 1, I_t = 1)}{P(Y_{t+1} = 1 \mid A_t = 0, I_t = 1)},
+$$
+which is akin to a relative risk. One is interested in testing the following null hypothesis
+$$
+H_0: \text{MEE}(t) = 0 \text{ for all } 1\leq t \leq m
+$$
+against the alternative hypothesis
+$$
+H_1: \text{MEE}(t) \neq 0 \text{ for some } 1\leq t \leq m.
+$$
+
+The sample size is calculated to ensure adaquate power to detect a particular target alternative
+$$
+H_1^{\text{target}}: \text{MEE}(t) = f(t)^T \beta \text{ for all } 1\leq t \leq m,
+$$
+where $f(t)$ is a user-specified $p$-dimensional vector-valued function of $t$ and $\beta \in \mathbb{R}^p$. For example, if the user conjectures that a likely alternative is a constant treatment effect, they can set $f(t) = 1$ and $\beta$ will be a scalar; if the user conjectures that the treatment effect would decrease over time, they can set $f(t) = (1, t)^T$ and $\beta$ will be a vector of length 2. The user will supply $f(t)$ and $\beta$, along with other inputs that will be detailed below, when using the calculator in this package.
 
 
 # Quick Start
@@ -91,7 +116,7 @@ tau_t_1
 ```
 
 
-`f_t_1`: A 2 by 10 matrix defining the alternative hypothesis. In this example
+`f_t_1`: A 10 by 2 matrix defining the alternative hypothesis. In this example
 it is a log-linear trend. Each row corresponds to a decision point (in this
 example we have 10).
 ```{r}
@@ -99,7 +124,7 @@ f_t_1
 ```
 
 
-`g_t_1`: A 2 by 10 matrix defining the null hypothesis.In this example it is a
+`g_t_1`: A 10 by 2 matrix defining the null hypothesis.In this example it is a
 log-linear trend. As with `f_t_1`, each row corresponds to a decision point.
 ```{r}
 g_t_1
