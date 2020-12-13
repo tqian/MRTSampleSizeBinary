@@ -23,7 +23,7 @@
 #' @import ggplot2
 #'
 #' @examples            power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
-#'                         p_t_1, 0.05, 7, 700)
+#'                         p_t_1, 0.05, 15, 700)
 power_vs_n_plot <- function(avail_pattern,
                                      f_t,
                                      g_t,
