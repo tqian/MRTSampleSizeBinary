@@ -32,7 +32,7 @@ power_vs_n_plot <- function(avail_pattern,
                                      alpha,
                                      p_t,
                                      gamma,
-                                     min_n=min_samp(alpha, beta),
+                                     min_n=max(min_samp(alpha, beta), 11),
                                      max_n=max_samp(min_n)
                                      )
 {
