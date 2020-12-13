@@ -5,14 +5,14 @@
 "tau_t_1"
 
 #' A matrix defining the alternative hypothesis.
-#' @format a 2 by 10 matrix
+#' @format a 10 by 2 matrix
 #' \describe{
 #' In this example it is a log-linear trend.
 #' }
 "f_t_1"
    
 #' A matrix defining the null hypothesis.
-#' @format a 2 by 10 matrix
+#' @format a 10 by 2 matrix
 #' \describe{
 #' In this example it is a log-linear trend.
 #' }
