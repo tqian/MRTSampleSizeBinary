@@ -1,4 +1,4 @@
-#' Computes the non-centrality parameter for a an F distributed random variable
+#' Computes the non-centrality parameter for an F distributed random variable
 #' in the context of a MRT with binary outcome. 
 #' 
 #' This is primarily a helper function for
