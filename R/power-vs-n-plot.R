@@ -1,17 +1,18 @@
-
 #' Returns a plot of power vs sample size in the context of a binary outcome
 #' MRT.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
-#'   alternative together with beta
+#'   alternative together with beta. Assumed to be matrix of size T*p.
 #' @param g_t           Defines success probability null curve together with
-#'   alpha
-#' @param beta          Defines marginal excursion effect MEE(t) under
-#'   alternative together with f_t
-#' @param alpha         Defines success probability null curve together with g_t
-#' @param p_t           Randomization probability at each time point
+#'   alpha. Assumed to be matrix of size T*q.
+#' @param beta          Length p vector that defines marginal excursion effect
+#'   MEE(t) under alternative together with f_t.
+#' @param alpha         Length q vector that defines success probability null
+#'   curve together with g_t.
+#' @param p_t           Length T vector of Randomization probabilities at each
+#'   time point.
 #' @param gamma         Desired Type I error
 #' @param min_n         Minimum of range of sample sizes to plot. Should be
 #'   greater than the sum of the dimensions of alpha and beta.
