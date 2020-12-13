@@ -106,6 +106,17 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     m_matrix <- m_and_sigma$m
     sigma_matrix <- m_and_sigma$sigma
     
+    suppressWarnings(
+      ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
+                                             p_t, gamma, 10))
+    
+    if(1-b <= ten_power) {
+      stop(strwrap(paste0("The required sample size is <=10 to attain ", 
+                          1-b, 
+                          " power for this setting. See help(calculate_mrt_bin_samplesize_f) for
+                        more details"), exdent=1))
+    }
+    
     # Set up the function that we will ultimately solve to get the sample size
     power_f <- function(n){
         
