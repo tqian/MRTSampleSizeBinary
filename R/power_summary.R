@@ -43,8 +43,9 @@ power_summary <- function(avail_pattern,
   min_power <- min(power_levels)
   max_power <- max(power_levels)
   
-  ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
-                                         p_t, gamma, 10)
+  suppressWarnings(
+    ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
+                                         p_t, gamma, 10))
   # check power is within (0,1)
   if(max_power >=1 | min_power <= 0){
     stop("Power should be between 0 and 1")
