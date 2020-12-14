@@ -61,11 +61,12 @@ power_vs_n_plot <- function(avail_pattern,
 
   
   ggplot(power_n_data)+
-    geom_line(aes(y = power_vec, x = n_vec), color = "blue")+
+    geom_line(aes(y = power_vec, x = n_vec), color = "deepskyblue3")+
     ggtitle("Power vs. Sample Size") +
-    xlab("Sample Size") + ylab("Power")
-  
-  
+    xlab("Sample Size") + ylab("Power")+
+    ylim(0,1)+
+    theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))
   
   
 
