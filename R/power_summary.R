@@ -52,7 +52,7 @@ power_summary <- function(avail_pattern,
   
   # make sure power is sufficiently large
   if(min_power <= ten_power) {
-    stop(strwrap(paste0("The required sample size is <=10 to attain ", 
+    warning(strwrap(paste0("The required sample size is <=10 to attain ", 
                         min_power, 
                         " power for this setting. See help(power_summary) for
                         more details"), exdent=1))
