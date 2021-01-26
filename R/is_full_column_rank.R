@@ -1,6 +1,6 @@
 #' Check if a matrix is full column rank.
 #' 
-#' Used in checking if p_t*f_t is in linear span of g_t.
+#' Used in checking if p_t*f_t is in the linear span of g_t.
 #'
 #' @param mat A matrix.
 #'

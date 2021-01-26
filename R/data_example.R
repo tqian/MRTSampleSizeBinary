@@ -4,14 +4,14 @@
 #'  at each decision point.}
 "tau_t_1"
 
-#' A matrix defining the alternative hypothesis.
+#' A matrix defining the MEE under the alternative hypothesis.
 #' @format a 10 by 2 matrix
 #' \describe{
 #' In this example it is a log-linear trend.
 #' }
 "f_t_1"
    
-#' A matrix defining the null hypothesis.
+#' A matrix defining the success probability null curve.
 #' @format a 10 by 2 matrix
 #' \describe{
 #' In this example it is a log-linear trend.
@@ -26,7 +26,7 @@
 #' }
 "p_t_1"
 
-#' Vector that defines the alternative hypothesis.
+#' Vector that defines the MEE under the alternative hypothesis.
 #' @format a length 2 vector
 #' \describe{
 #' The matrix multiplication of this vector with f_t_1 defines the MEE under the
@@ -34,7 +34,7 @@
 #' }
 "beta_1"
 
-#' Vector that defines the null hypothesis.
+#' Vector that defines the success probability null curve.
 #' @format a length 2 vector
 #' \describe{
 #' The matrix multiplication of this vector with g_t_1 defines the MEE under the
