@@ -1,6 +1,6 @@
 #' Vector that holds the average availability at each time point.
-#' @format vector of length T
-#' \describe{A vector of length T that is the average availability
+#' @format vector of length m
+#' \describe{A vector of length m that is the average availability
 #'  at each decision point.}
 "tau_t_1"
 
@@ -20,7 +20,7 @@
 
 
 #' A vector of randomization probabilities for each time point.  
-#' @format a length T vector
+#' @format a length m vector
 #' \describe{
 #' Vector of randomization probabilities. 
 #' }

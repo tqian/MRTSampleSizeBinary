@@ -8,7 +8,7 @@ MRT with binary outcomes.}
 mrt_binary_power(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma, n)
 }
 \arguments{
-\item{avail_pattern}{A vector of length T that is the average availability at
+\item{avail_pattern}{A vector of length m that is the average availability at
 each time point}
 
 \item{f_t}{Defines marginal excursion effect MEE(t) under

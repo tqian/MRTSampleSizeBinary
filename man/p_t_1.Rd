@@ -5,7 +5,7 @@
 \alias{p_t_1}
 \title{A vector of randomization probabilities for each time point.}
 \format{
-a length T vector
+a length m vector
 \describe{
 Vector of randomization probabilities. 
 }
