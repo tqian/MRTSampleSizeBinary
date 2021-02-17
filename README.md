@@ -1,4 +1,4 @@
-# mrtbincalc
+# MRTSampleSizeBinary
 This package provides a sample size calculator for Micro-randomized Trials with
 binary outcomes. The sample size formula is developed in ["Sample Size
 Considerations for Micro-Randomized Trials with Binary
