@@ -2,7 +2,7 @@
 #' variance-covariance matrix. 
 #' 
 #' Primarily a helper function for
-#' calculate_mrt_bin_power_f() and calculate_mrt_bin_samplesize_f().
+#' mrt_binary_power() and mrt_binary_ss().
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point

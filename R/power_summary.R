@@ -43,7 +43,7 @@ power_summary <- function(avail_pattern,
   min_power <- min(power_levels)
   max_power <- max(power_levels)
   
-  ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
+  ten_power <- mrt_binary_power(avail_pattern, f_t, g_t, beta, alpha, 
                                          p_t, gamma, 10)
   # check power is within (0,1)
   if(max_power >=1 | min_power <= 0){
@@ -62,7 +62,7 @@ power_summary <- function(avail_pattern,
   power_size <- cbind(power=power_levels, sample_size=0)
   
   for(r in 1:length(power_levels)){
-    power_size[r,2] <-  calculate_mrt_bin_samplesize_f(avail_pattern, f_t, g_t, 
+    power_size[r,2] <-  mrt_binary_ss(avail_pattern, f_t, g_t, 
                                                         beta, alpha, p_t, gamma, 
                                                         1-power_levels[r])
   }

@@ -22,7 +22,7 @@ Returns non-centrality parameter for an F distributed random
 }
 \description{
 This is primarily a helper function for
-calculate_mrt_bin_power_f() and calculate_mrt_bin_samplesize_f().
+mrt_binary_power() and mrt_binary_ss().
 }
 \examples{
 compute_ncp(300, beta_1, m_matrix_1, sigma_matrix_1)
