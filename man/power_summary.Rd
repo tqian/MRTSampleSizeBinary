@@ -45,16 +45,10 @@ Dataframe containing needed sample size to achieve
 \description{
 Returns sample sizes needed to achieve a range of power levels for the hypothesis test
 of marginal excursion effect (see Details) in the context of an MRT with binary outcomes
-with small sample correction using F-distribution.
+with small sample correction using F-distribution. See the vignette for
+more details.
 }
 \details{
-Let MEE_t denote the marginal excursion effect at all decision points
-(a vector of length T).
-The hypothesis test that the sample size is calculated for is
-H_0: MEE_t = rep(0, T)
-versus
-H_1: MEE_t = f_t * beta.
-
 The sample size calculator is based on an asymptotic result with a small
 sample correction. When the calculator finds out that a sample size less than
 or equal to 10 is sufficient to attain the desired power, the calculator does

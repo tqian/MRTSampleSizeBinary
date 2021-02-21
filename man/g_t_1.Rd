@@ -3,7 +3,7 @@
 \docType{data}
 \name{g_t_1}
 \alias{g_t_1}
-\title{A matrix defining the null hypothesis.}
+\title{A matrix defining the success probability null curve.}
 \format{
 a 10 by 2 matrix
 \describe{
@@ -14,6 +14,6 @@ In this example it is a log-linear trend.
 g_t_1
 }
 \description{
-A matrix defining the null hypothesis.
+A matrix defining the success probability null curve.
 }
 \keyword{datasets}

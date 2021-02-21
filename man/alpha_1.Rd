@@ -3,7 +3,7 @@
 \docType{data}
 \name{alpha_1}
 \alias{alpha_1}
-\title{Vector that defines the null hypothesis.}
+\title{Vector that defines the success probability null curve.}
 \format{
 a length 2 vector
 \describe{
@@ -15,6 +15,6 @@ null hypothesis.
 alpha_1
 }
 \description{
-Vector that defines the null hypothesis.
+Vector that defines the success probability null curve.
 }
 \keyword{datasets}

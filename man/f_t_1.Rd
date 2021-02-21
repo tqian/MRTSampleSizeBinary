@@ -3,7 +3,7 @@
 \docType{data}
 \name{f_t_1}
 \alias{f_t_1}
-\title{A matrix defining the alternative hypothesis.}
+\title{A matrix defining the MEE under the alternative hypothesis.}
 \format{
 a 10 by 2 matrix
 \describe{
@@ -14,6 +14,6 @@ In this example it is a log-linear trend.
 f_t_1
 }
 \description{
-A matrix defining the alternative hypothesis.
+A matrix defining the MEE under the alternative hypothesis.
 }
 \keyword{datasets}

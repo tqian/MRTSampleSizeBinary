@@ -3,7 +3,7 @@
 \docType{data}
 \name{beta_1}
 \alias{beta_1}
-\title{Vector that defines the alternative hypothesis.}
+\title{Vector that defines the MEE under the alternative hypothesis.}
 \format{
 a length 2 vector
 \describe{
@@ -15,6 +15,6 @@ alternative hypothesis.
 beta_1
 }
 \description{
-Vector that defines the alternative hypothesis.
+Vector that defines the MEE under the alternative hypothesis.
 }
 \keyword{datasets}
