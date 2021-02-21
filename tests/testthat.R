@@ -1,4 +1,4 @@
 library(testthat)
-library(MRTSampleSizeBinary)
+library(mrtbincalc)
 
-test_check("MRTSampleSizeBinary")
+test_check("mrtbincalc")

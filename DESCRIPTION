@@ -1,4 +1,4 @@
-Package: MRTSampleSizeBinary
+Package: mrtbincalc
 Type: Package
 Title: Power and Sample Size Calculator for MRT
 Version: 0.1.0

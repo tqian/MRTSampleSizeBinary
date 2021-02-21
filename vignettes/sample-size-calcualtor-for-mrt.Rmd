@@ -18,11 +18,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(MRTSampleSizeBinary)
+library(mrtbincalc)
 ```
 
 # Introduction 
-The **MRTSampleSizeBinary** package provides a sample size calculator for
+The **mrtbincalc** package provides a sample size calculator for
 micro-randomized trials (MRT) with binary outcomes. The sample size formula is
 developed in ["Sample Size Considerations for Micro-Randomized Trials with
 Binary Outcome"](https://sites.google.com/view/tianchen-qian/research) by E.
