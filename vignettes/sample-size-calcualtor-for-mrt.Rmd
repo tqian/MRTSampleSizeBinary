@@ -1,6 +1,6 @@
 ---
 title: "Sample Size Calculator for Micro-Randomized Trials with Binary Outcomes"
-author: "Thabat Dahdoul, Eliot Wong-Toi, Tianchen Qian"
+author: "Eliot Wong-Toi, Thabat Dahdoul, Tianchen Qian"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Sample Size Calculator for Micro-Randomized Trials (MRTs)}
