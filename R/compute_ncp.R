@@ -2,7 +2,7 @@
 #' in the context of a MRT with binary outcome. 
 #' 
 #' This is primarily a helper function for
-#' mrt_binary_power() and mrt_binary_ss().
+#' calculate_mrt_bin_power_f() and calculate_mrt_bin_samplesize_f().
 #'
 #' @param x            Sample size
 #' @param beta         Marginal excursion effect, assumed dimension p

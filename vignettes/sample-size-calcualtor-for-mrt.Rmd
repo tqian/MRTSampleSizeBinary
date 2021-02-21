@@ -130,7 +130,7 @@ alpha_1
 ```
 
 ## Examples
-### `mrt_binary_ss()`
+### `calculate_mrt_bin_samplesize_f()`
 Below we compute the required sample size for an MRT with the above data to
 achieve $0.8$ power. The argument `gamma` is the type I error rate, `b` is the
 type II error rate ($1-power$), and `exact` is a flag for if the function should
@@ -138,31 +138,31 @@ return the exact sample size our calculator computes (this may not be an
 integer) or the ceiling of this number. By default `exact=FALSE`. We see that
 the required sample size is $275$ individuals for our setup.
 ```{r}
-mrt_binary_ss(avail_pattern=tau_t_1, 
-              f_t=f_t_1, g_t=g_t_1, 
-              beta=beta_1, alpha=alpha_1,
-              p_t=p_t_1, 
-              gamma=0.05, 
-              b=.2,
-              exact=FALSE)
+calculate_mrt_bin_samplesize_f(avail_pattern=tau_t_1, 
+                               f_t=f_t_1, g_t=g_t_1, 
+                               beta=beta_1, alpha=alpha_1,
+                               p_t=p_t_1, 
+                               gamma=0.05, 
+                               b=.2,
+                               exact=FALSE)
 ```
 
-### `mrt_binary_power()`
+### `calculate_mrt_bin_power_f()`
 If the investigator would like to calculate power based on a fixed sample size
 that is feasible in the study, with a specified significance level, then they
-can use the `mrt_binary_power()` function. The first seven arguments
-are the same as in `mrt_binary_power()`. The final argument, `n`
+can use the `calculate_mrt_bin_power_f()` function. The first seven arguments
+are the same as in `calculate_mrt_bin_samplesize_f()`. The final argument, `n`
 is the number of individuals. Notice how the sample size (`n=275`) is the output
 from the previous computation and the power is very close to $0.8$, there is a
 slight discrepancy due to the rounding up of the sample size in the previous
 example.
 ```{r}
-mrt_binary_power(avail_pattern=tau_t_1, 
-                 f_t=f_t_1, g_t=g_t_1, 
-                 beta=beta_1, alpha=alpha_1, 
-                 p_t=p_t_1, 
-                 gamma=0.05, 
-                 n=275)
+calculate_mrt_bin_power_f(avail_pattern=tau_t_1, 
+                          f_t=f_t_1, g_t=g_t_1, 
+                          beta=beta_1, alpha=alpha_1, 
+                          p_t=p_t_1, 
+                          gamma=0.05, 
+                          n=275)
 ```
 ### `power_vs_n_plot()`
 Based on the fraction of power calculated above, the user can employ this
