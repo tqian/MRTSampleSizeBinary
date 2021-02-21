@@ -5,8 +5,8 @@
 \alias{tau_t_1}
 \title{Vector that holds the average availability at each time point.}
 \format{
-vector of length m
-\describe{A vector of length m that is the average availability
+vector of length T
+\describe{A vector of length T that is the average availability
  at each decision point.}
 }
 \usage{

@@ -18,7 +18,7 @@ mrt_binary_ss(
 )
 }
 \arguments{
-\item{avail_pattern}{A vector of length m that is the average availability at
+\item{avail_pattern}{A vector of length T that is the average availability at
 each time point}
 
 \item{f_t}{Defines marginal excursion effect MEE(t) under
@@ -33,7 +33,7 @@ MEE(t) under alternative together with f_t.}
 \item{alpha}{Length q vector that defines success probability null
 curve together with g_t.}
 
-\item{p_t}{Length m vector of Randomization probabilities at each
+\item{p_t}{Length T vector of Randomization probabilities at each
 time point.}
 
 \item{gamma}{Desired Type I error}
