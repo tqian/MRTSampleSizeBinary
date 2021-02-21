@@ -69,12 +69,12 @@ where $f(t)$ is a user-specified $p$-dimensional vector-valued function of $t$ a
 
 # Quick Start
 
-The function to calculate the sample size is `calculate_mrt_bin_samplesize_f()`.
-The function to calculate the sample size is `calculate_mrt_bin_power_f()`.
+The function to calculate the sample size is `mrt_binary_ss()`.
+The function to calculate the sample size is `mrt_binary_power()`.
 Because the syntax for their use are similar, here we illustrate the use of
-`calculate_mrt_bin_samplesize_f()`.
+`mrt_binary_ss()`.
 
-The function `calculate_mrt_bin_samplesize_f()` takes in the following arguments:
+The function `mrt_binary_ss()` takes in the following arguments:
 
 - `avail_pattern`: A vector of length $m$. The $t$-th entry denotes the average availability
 at decision point $t$, $E(I_t)$.
@@ -84,7 +84,7 @@ at decision point $t$, $P(A_t = 1)$.
 
 - `f_t` and `beta`: They characterize the MEE under the target alternative $H_1^{\text{target}}$, where `f_t` is a matrix of size $m \times p$, and `beta` is a vector of length $p$, and $p$ is the degrees of freedom for the MEE under alternative. Specifically, under $H_1^{\text{target}}$, $\text{MEE}(t)$ equals `f_t[t, ] %*% beta` for each $1 \leq t \leq m$. Usually the first column of `f_t` is a column of 1's.
 
-- `g_t` and `alpha`: They characterize the success probability null curve $E(Y_{t+1} \mid A_t = 0, I_t = 1)$ for $1 \leq t \leq m$, where `g_t` is a matrix of size $m \times q$ and `alpha` is a vector of length $q$, and $q$ is the degrees of freedom for the success probability null curve. Specifically, $E(Y_{t+1} \mid A_t = 0, I_t = 1)$ equals `g_t[t, ] %*% alpha` for each $1 \leq t \leq m$. Usually the first column of `g_t` is a column of 1's. In addition, it is required that the linear column span of `g_t` contains `f_t[, j] * p_t` for each $1 \leq j \leq p$ for the sample size calculation result to be accurate; `calculate_mrt_bin_samplesize_f()` checks for this and if not satisfied the function will output a warning.
+- `g_t` and `alpha`: They characterize the success probability null curve $E(Y_{t+1} \mid A_t = 0, I_t = 1)$ for $1 \leq t \leq m$, where `g_t` is a matrix of size $m \times q$ and `alpha` is a vector of length $q$, and $q$ is the degrees of freedom for the success probability null curve. Specifically, $E(Y_{t+1} \mid A_t = 0, I_t = 1)$ equals `g_t[t, ] %*% alpha` for each $1 \leq t \leq m$. Usually the first column of `g_t` is a column of 1's. In addition, it is required that the linear column span of `g_t` contains `f_t[, j] * p_t` for each $1 \leq j \leq p$ for the sample size calculation result to be accurate; `mrt_binary_ss()` checks for this and if not satisfied the function will output a warning.
 
 - `gamma`: A scalar. This is the desired type I error.
 
@@ -97,7 +97,7 @@ at decision point $t$, $P(A_t = 1)$.
 ## A numerical example
 
 We use the following numerical example to illustrate 4 functions in this package:
-`calculate_mrt_bin_samplesize_f()`, `calculate_mrt_bin_power_f()`,
+`mrt_binary_ss()`, `mrt_binary_power()`,
 `power_vs_n_plot()`, and `power_summary()`. In this numerical example,
 the total number of decision points $m = 10$. The degrees of freedom for
 the MEE and the success probability null curve are $p = 2$ and $q = 2$.
@@ -143,7 +143,7 @@ alpha_1
 ```
 
 
-### Example use of `calculate_mrt_bin_samplesize_f()`
+### Example use of `mrt_binary_ss()`
 
 Below we compute the required sample size for an MRT to
 achieve $0.8$ power using the above numerical example.
@@ -153,7 +153,7 @@ return the exact sample size our calculator computes (this may not be an
 integer) or the ceiling of this number. By default `exact=FALSE`. We see that
 the required sample size is $275$ individuals for this numerical example.
 ```{r}
-calculate_mrt_bin_samplesize_f(avail_pattern=tau_t_1, 
+mrt_binary_ss(avail_pattern=tau_t_1, 
                                f_t=f_t_1, g_t=g_t_1, 
                                beta=beta_1, alpha=alpha_1,
                                p_t=p_t_1, 
@@ -162,19 +162,19 @@ calculate_mrt_bin_samplesize_f(avail_pattern=tau_t_1,
                                exact=FALSE)
 ```
 
-### Example use of `calculate_mrt_bin_power_f()`
+### Example use of `mrt_binary_power()`
 
 If the investigator would like to calculate power given a sample size
 and a specified significance level, then they
-can use the `calculate_mrt_bin_power_f()` function. The first seven arguments
-are the same as in `calculate_mrt_bin_samplesize_f()`. The final argument, `n`
+can use the `mrt_binary_power()` function. The first seven arguments
+are the same as in `mrt_binary_ss()`. The final argument, `n`
 is the sample size (i.e., number of individuals). Notice that, as expected,
 the sample size (`n=275`) is the output
 from the previous computation and the power is very close to $0.8$; it is not exactly 0.8 
 due to the rounding up of the sample size in the previous
 example.
 ```{r}
-calculate_mrt_bin_power_f(avail_pattern=tau_t_1, 
+mrt_binary_power(avail_pattern=tau_t_1, 
                           f_t=f_t_1, g_t=g_t_1, 
                           beta=beta_1, alpha=alpha_1, 
                           p_t=p_t_1, 

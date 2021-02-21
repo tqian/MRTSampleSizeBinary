@@ -5,7 +5,7 @@
 #' with small sample correction using F-distribution. See the vignette for
 #' more details.
 #'
-#' @param avail_pattern A vector of length T that is the average availability at
+#' @param avail_pattern A vector of length m that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
 #'   alternative together with beta. Assumed to be matrix of size T*p.
@@ -26,9 +26,9 @@
 #'   size.
 #' @export
 #'
-#' @examples            calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1,
+#' @examples            mrt_binary_power(tau_t_1, f_t_1, g_t_1, beta_1,
 #'                                               alpha_1, p_t_1, 0.05, 100)
-calculate_mrt_bin_power_f <- function(avail_pattern,  
+mrt_binary_power <- function(avail_pattern,  
                                       f_t,             
                                       g_t,             
                                       beta,            

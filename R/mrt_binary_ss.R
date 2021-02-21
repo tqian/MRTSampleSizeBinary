@@ -17,7 +17,7 @@
 #' availability, (2) whether the duration of study is too long, (3) whether the
 #' treatment effect is overestimated, and (4) whether the power is set too low.
 #'
-#' @param avail_pattern A vector of length T that is the average availability at
+#' @param avail_pattern A vector of length m that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
 #'   alternative together with beta. Assumed to be matrix of size T*p.
@@ -37,10 +37,10 @@
 #' @importFrom          stats uniroot qf pf
 #' @export
 #'
-#' @examples calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, 
+#' @examples mrt_binary_ss(tau_t_1, f_t_1, g_t_1, 
 #'                                          beta_1, alpha_1, p_t_1, 
 #'                                          0.05, .2, FALSE)
-calculate_mrt_bin_samplesize_f <- function(avail_pattern,  
+mrt_binary_ss <- function(avail_pattern,  
                                  f_t,             
                                  g_t,             
                                  beta,            

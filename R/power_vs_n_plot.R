@@ -53,7 +53,7 @@ power_vs_n_plot <- function(avail_pattern,
   
   for (n_i in n_vec){
     indx <- which(n_vec == n_i)
-    power_vec[indx] <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, 
+    power_vec[indx] <- mrt_binary_power(avail_pattern, f_t, g_t, 
                                                  beta, alpha, p_t, gamma,n_i)
  
   }
