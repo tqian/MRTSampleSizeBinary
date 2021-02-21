@@ -2,8 +2,7 @@
 % Please edit documentation in R/calculate_mrt_bin_samplesize_f.R
 \name{calculate_mrt_bin_samplesize_f}
 \alias{calculate_mrt_bin_samplesize_f}
-\title{Returns sample size needed to achieve a specified power in the context of an
-MRT with binary outcomes.}
+\title{Calculate sample size for binary outcome MRT}
 \usage{
 calculate_mrt_bin_samplesize_f(
   avail_pattern,
@@ -46,8 +45,28 @@ time point.}
 Sample size to achieve desired power.
 }
 \description{
-Returns sample size needed to achieve a specified power in the context of an
-MRT with binary outcomes.
+Returns sample size needed to achieve a specified power for the hypothesis test
+of marginal excursion effect (see Details) in the context of an MRT with binary outcomes
+with small sample correction using F-distribution.
+}
+\details{
+Let MEE_t denote the marginal excursion effect at all decision points
+(a vector of length T).
+The hypothesis test that the sample size is calculated for is
+H_0: MEE_t = rep(0, T)
+versus
+H_1: MEE_t = f_t * beta.
+
+When the calculator finds out that a sample size less than
+or equal to 10 is sufficient to attain the desired power, the calculator does
+not output the exact sample size but produces an error message. This is because 
+the sample size calculator is based on an asymptotic result with a small
+sample correction, and in
+this situation the sample size result may not be as accurate. In general,
+when the output sample size is small, one might reconsider the following: (1)
+whether you are correctly or conservatively guessing the average of expected
+availability, (2) whether the duration of study is too long, (3) whether the
+treatment effect is overestimated, and (4) whether the power is set too low.
 }
 \examples{
 calculate_mrt_bin_samplesize_f(tau_t_1, f_t_1, g_t_1, 

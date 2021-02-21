@@ -1,17 +1,18 @@
-
 #' Returns a plot of power vs sample size in the context of a binary outcome
-#' MRT.
+#' MRT. See the vignette for more details.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
-#'   alternative together with beta
+#'   alternative together with beta. Assumed to be matrix of size T*p.
 #' @param g_t           Defines success probability null curve together with
-#'   alpha
-#' @param beta          Defines marginal excursion effect MEE(t) under
-#'   alternative together with f_t
-#' @param alpha         Defines success probability null curve together with g_t
-#' @param p_t           Randomization probability at each time point
+#'   alpha. Assumed to be matrix of size T*q.
+#' @param beta          Length p vector that defines marginal excursion effect
+#'   MEE(t) under alternative together with f_t.
+#' @param alpha         Length q vector that defines success probability null
+#'   curve together with g_t.
+#' @param p_t           Length T vector of Randomization probabilities at each
+#'   time point.
 #' @param gamma         Desired Type I error
 #' @param min_n         Minimum of range of sample sizes to plot. Should be
 #'   greater than the sum of the dimensions of alpha and beta.
@@ -23,7 +24,7 @@
 #' @import ggplot2
 #'
 #' @examples            power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
-#'                         p_t_1, 0.05, 7, 700)
+#'                         p_t_1, 0.05, 15, 700)
 power_vs_n_plot <- function(avail_pattern,
                                      f_t,
                                      g_t,
@@ -31,7 +32,7 @@ power_vs_n_plot <- function(avail_pattern,
                                      alpha,
                                      p_t,
                                      gamma,
-                                     min_n=min_samp(alpha, beta),
+                                     min_n=max(min_samp(alpha, beta), 11),
                                      max_n=max_samp(min_n)
                                      )
 {

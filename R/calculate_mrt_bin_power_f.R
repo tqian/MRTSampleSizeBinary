@@ -1,18 +1,24 @@
-#' Returns power of a test given a prespecified sample size in the context of an
-#' MRT with binary outcomes.
+#' Calculate power for binary outcome MRT
+#'
+#' Returns power of the hypothesis test of marginal excursion effect (see Details) given 
+#' a specified sample size in the context of an MRT with binary outcomes
+#' with small sample correction using F-distribution. See the vignette for
+#' more details.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
 #' @param f_t           Defines marginal excursion effect MEE(t) under
-#'   alternative together with beta
+#'   alternative together with beta. Assumed to be matrix of size T*p.
 #' @param g_t           Defines success probability null curve together with
-#'   alpha
-#' @param beta          Defines marginal excursion effect MEE(t) under
-#'   alternative together with f_t
-#' @param alpha         Defines success probability null curve together with g_t
-#' @param p_t           Randomization probability at each time point
+#'   alpha. Assumed to be matrix of size T*q.
+#' @param beta          Length p vector that defines marginal excursion effect
+#'   MEE(t) under alternative together with f_t.
+#' @param alpha         Length q vector that defines success probability null
+#'   curve together with g_t.
+#' @param p_t           Length T vector of Randomization probabilities at each
+#'   time point.
 #' @param gamma         Desired Type I error
-#' @param n             Number of participants
+#' @param n             Sample size
 #'
 #' @importFrom          stats qf pf
 #'
@@ -42,7 +48,6 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
   if(!all(dim_vec == pts)){
     stop("All arguments must agree on number of time points.")
   }
-
   
   if(dim(f_t)[2] > dim(g_t)[2]){
     warning("p_t *f_t should lie in span of g_t")
@@ -74,6 +79,10 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
   if(n %% 1 != 0){
     warning("n should be an integer")
   }
+  
+  if(n <= 10) {
+    warning("n <= 10 may result in inaccurate power calculation, because the sample size formula is based on an asymptotic result.")
+  }
 
   # check that f_t is of full column rank
   if(!is_full_column_rank(f_t)) {
@@ -96,7 +105,7 @@ calculate_mrt_bin_power_f <- function(avail_pattern,
     }
   }
   
-  ## towards the end of the main function execution
+  # check that p_t * f_t is in the linear span of g_t
   if (lincombo_flag) {
     warning("p_t * f_t is not in the linear span of g_t,
           so the sample size result can be inaccurate.\n

@@ -1,5 +1,10 @@
-#' Reports the power of a binary outcome MRT at a range of power levels.
-#'
+#' Calculate sample size at a range of power levels.
+#' 
+#' Returns sample sizes needed to achieve a range of power levels for the hypothesis test
+#' of marginal excursion effect (see Details) in the context of an MRT with binary outcomes
+#' with small sample correction using F-distribution. See the vignette for
+#' more details.
+#' 
 #' The sample size calculator is based on an asymptotic result with a small
 #' sample correction. When the calculator finds out that a sample size less than
 #' or equal to 10 is sufficient to attain the desired power, the calculator does
@@ -43,8 +48,9 @@ power_summary <- function(avail_pattern,
   min_power <- min(power_levels)
   max_power <- max(power_levels)
   
-  ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
-                                         p_t, gamma, 10)
+  suppressWarnings(
+    ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
+                                         p_t, gamma, 10))
   # check power is within (0,1)
   if(max_power >=1 | min_power <= 0){
     stop("Power should be between 0 and 1")

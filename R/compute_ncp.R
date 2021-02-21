@@ -1,7 +1,7 @@
-#' Computes the non-centrality parameter for a an F distributed random variable
+#' Computes the non-centrality parameter for an F distributed random variable
 #' in the context of a MRT with binary outcome. 
 #' 
-#' This is primarily a helper function for
+#' A helper function for
 #' calculate_mrt_bin_power_f() and calculate_mrt_bin_samplesize_f().
 #'
 #' @param x            Sample size

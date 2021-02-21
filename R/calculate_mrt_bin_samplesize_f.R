@@ -1,5 +1,21 @@
-#' Returns sample size needed to achieve a specified power in the context of an
-#' MRT with binary outcomes.
+#' Calculate sample size for binary outcome MRT
+#'
+#' Returns sample size needed to achieve a specified power for the hypothesis test
+#' of marginal excursion effect (see Details) in the context of an MRT with binary outcomes
+#' with small sample correction using F-distribution. See the vignette for
+#' more details.
+#'
+#' When the calculator finds out that a sample size less than
+#' or equal to 10 is sufficient to attain the desired power, the calculator does
+#' not output the exact sample size but produces an error message. This is because 
+#' the sample size calculator is based on an asymptotic result, and in
+#' this situation the sample size result may not be as accurate.
+#' (A small sample correction is built in the calculator, but even with the correction
+#' the sample size result may still be inaccurate when it is <= 10.) In general,
+#' when the output sample size is small, one might reconsider the following: (1)
+#' whether you are correctly or conservatively guessing the average of expected
+#' availability, (2) whether the duration of study is too long, (3) whether the
+#' treatment effect is overestimated, and (4) whether the power is set too low.
 #'
 #' @param avail_pattern A vector of length T that is the average availability at
 #'   each time point
@@ -105,6 +121,17 @@ calculate_mrt_bin_samplesize_f <- function(avail_pattern,
     m_and_sigma <- compute_m_sigma(avail_pattern, f_t, g_t, beta, alpha, p_t)
     m_matrix <- m_and_sigma$m
     sigma_matrix <- m_and_sigma$sigma
+    
+    suppressWarnings(
+      ten_power <- calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, 
+                                             p_t, gamma, 10))
+    
+    if(1-b <= ten_power) {
+      stop(strwrap(paste0("The required sample size is <=10 to attain ", 
+                          1-b, 
+                          " power for this setting. See help(calculate_mrt_bin_samplesize_f) for
+                        more details"), exdent=1))
+    }
     
     # Set up the function that we will ultimately solve to get the sample size
     power_f <- function(n){

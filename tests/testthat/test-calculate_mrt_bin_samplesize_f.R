@@ -119,8 +119,8 @@ test_that(
                                      alpha_new, p_t, gamma,
                                      1-calculate_mrt_bin_power_f(
                                        tau_t, f_t, g_new, beta,
-                                       alpha_new, p_t, gamma, 10), FALSE),
-      10)
+                                       alpha_new, p_t, gamma, 50), TRUE),
+      50)
   }
 )
 

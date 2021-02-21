@@ -2,8 +2,7 @@
 % Please edit documentation in R/calculate_mrt_bin_power_f.R
 \name{calculate_mrt_bin_power_f}
 \alias{calculate_mrt_bin_power_f}
-\title{Returns power of a test given a prespecified sample size in the context of an
-MRT with binary outcomes.}
+\title{Calculate power for binary outcome MRT}
 \usage{
 calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma, n)
 }
@@ -12,29 +11,40 @@ calculate_mrt_bin_power_f(avail_pattern, f_t, g_t, beta, alpha, p_t, gamma, n)
 each time point}
 
 \item{f_t}{Defines marginal excursion effect MEE(t) under
-alternative together with beta}
+alternative together with beta. Assumed to be matrix of size T*p.}
 
 \item{g_t}{Defines success probability null curve together with
-alpha}
+alpha. Assumed to be matrix of size T*q.}
 
-\item{beta}{Defines marginal excursion effect MEE(t) under
-alternative together with f_t}
+\item{beta}{Length p vector that defines marginal excursion effect
+MEE(t) under alternative together with f_t.}
 
-\item{alpha}{Defines success probability null curve together with g_t}
+\item{alpha}{Length q vector that defines success probability null
+curve together with g_t.}
 
-\item{p_t}{Randomization probability at each time point}
+\item{p_t}{Length T vector of Randomization probabilities at each
+time point.}
 
 \item{gamma}{Desired Type I error}
 
-\item{n}{Number of participants}
+\item{n}{Sample size}
 }
 \value{
 Power of the test for fixed null/alternative and sample
   size.
 }
 \description{
-Returns power of a test given a prespecified sample size in the context of an
-MRT with binary outcomes.
+Returns power of the hypothesis test of marginal excursion effect (see Details) given 
+a specified sample size in the context of an MRT with binary outcomes
+with small sample correction using F-distribution.
+}
+\details{
+Let MEE_t denote the marginal excursion effect at all decision points
+(a vector of length T).
+The hypothesis test that the sample size is calculated for is
+H_0: MEE_t = rep(0, T)
+versus
+H_1: MEE_t = f_t * beta.
 }
 \examples{
            calculate_mrt_bin_power_f(tau_t_1, f_t_1, g_t_1, beta_1,

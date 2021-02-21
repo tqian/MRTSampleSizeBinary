@@ -13,7 +13,7 @@ power_vs_n_plot(
   alpha,
   p_t,
   gamma,
-  min_n = min_samp(alpha, beta),
+  min_n = max(min_samp(alpha, beta), 11),
   max_n = max_samp(min_n)
 )
 }
@@ -22,17 +22,19 @@ power_vs_n_plot(
 each time point}
 
 \item{f_t}{Defines marginal excursion effect MEE(t) under
-alternative together with beta}
+alternative together with beta. Assumed to be matrix of size T*p.}
 
 \item{g_t}{Defines success probability null curve together with
-alpha}
+alpha. Assumed to be matrix of size T*q.}
 
-\item{beta}{Defines marginal excursion effect MEE(t) under
-alternative together with f_t}
+\item{beta}{Length p vector that defines marginal excursion effect
+MEE(t) under alternative together with f_t.}
 
-\item{alpha}{Defines success probability null curve together with g_t}
+\item{alpha}{Length q vector that defines success probability null
+curve together with g_t.}
 
-\item{p_t}{Randomization probability at each time point}
+\item{p_t}{Length T vector of Randomization probabilities at each
+time point.}
 
 \item{gamma}{Desired Type I error}
 
@@ -51,5 +53,5 @@ MRT.
 }
 \examples{
            power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
-                        p_t_1, 0.05, 7, 700)
+                        p_t_1, 0.05, 15, 700)
 }

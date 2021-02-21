@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_ncp.R
 \name{compute_ncp}
 \alias{compute_ncp}
-\title{Computes the non-centrality parameter for a an F distributed random variable
+\title{Computes the non-centrality parameter for an F distributed random variable
 in the context of a MRT with binary outcome.}
 \usage{
 compute_ncp(x, beta, m_matrix, sigma_matrix)

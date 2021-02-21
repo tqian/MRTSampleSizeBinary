@@ -1,9 +1,9 @@
 ---
-title: "Sample Size Calculator for Micro-Randomized Trials"
-author: "Thabat Dahdoul, Eliot Wong-Toi"
+title: "Sample Size Calculator for Micro-Randomized Trials with Binary Outcomes"
+author: "Thabat Dahdoul, Eliot Wong-Toi, Tianchen Qian"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Sample Size Calculator for Micro-Randomized Trials}
+  %\VignetteIndexEntry{Sample Size Calculator for Micro-Randomized Trials (MRTs)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   
@@ -17,94 +17,102 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Background 
+The **mrtbincalc** package provides a sample size calculator for
+micro-randomized trials (MRT) where the proximal outcomes are binary. 
+This calculator can be used to either 
+
+- determine the sample size needed
+to ensure a specified power when testing for a nonzero marginal causal excursion effect, or
+
+- determine the power given a sample size when testing for a nonzero marginal causal excursion effect. 
+
+MRT is an experimental design
+for optimizing mobile health interventions such as push notifications to increase physical activity. The calculator is based on the methods developed by @cohn2021sample.
+For a general overview of MRT, see @klasnja_microrandomized_2015 and @liao2016sample. Here we briefly review the hypothesis test that the sample size is calculated for.
+
+Let $(X_1, A_1, Y_2, X_2, A_2, Y_3, \ldots, X_m, A_m, Y_{m+1})$ denote the observed data
+from a participant in the MRT, where $m$ denotes the total number of decision points, and for each decision point $t$:
+
+- $X_t$ denotes the time-varying covariate.
+
+- $A_t$ denotes the treatment assignment.
+We assume $A_t$ takes value in $\{0, 1\}$: For example, if the treatment is a push notification, then $A_t = 0$ means the push notification is not delivered at $t$,
+and $A_t = 1$ means the push notification is delivered at $t$.
+
+- $Y_{t+1}$ denotes the binary proximal outcome.
+
+- $I_t$ denote the availability condition at $t$: $I_t = 1$ if the participant is
+available for treatment at $t$, and $I_t = 0$ if the participant is unavailable at $t$.
+With our notation $I_t$ is included in $X_t$.
+
+For primary analysis of an MRT, one is usually interested in testing for a marginal causal
+excursion effect (MEE); see @cohn2021sample and @qian2020estimating for details. Under standard causal assumptions, MEE at decision point $t$ can be expressed as
+$$
+\text{MEE}(t) = \log \frac{P(Y_{t+1} = 1 \mid A_t = 1, I_t = 1)}{P(Y_{t+1} = 1 \mid A_t = 0, I_t = 1)},
+$$
+which is akin to a relative risk. We consider testing the following null hypothesis
+$$
+H_0: \text{MEE}(t) = 0 \text{ for all } 1\leq t \leq m
+$$
+against the alternative hypothesis
+$$
+H_1: \text{MEE}(t) \neq 0 \text{ for some } 1\leq t \leq m.
+$$
+
+The sample size is calculated to ensure adequate power to detect a particular target alternative
+$$
+H_1^{\text{target}}: \text{MEE}(t) = f(t)^T \beta \text{ for all } 1\leq t \leq m,
+$$
+where $f(t)$ is a user-specified $p$-dimensional vector-valued function of $t$ and $\beta \in \mathbb{R}^p$. For example, if the user conjectures that a likely alternative is a constant treatment effect, they can set $f(t) = 1$ and $\beta$ will be a scalar; if the user conjectures that the treatment effect would decrease over time, they can set $f(t) = (1, t)^T$ and $\beta$ will be a vector of length 2. The user will supply $f(t)$ and $\beta$, along with other inputs that will be detailed below, when using the calculator in this package.
+
+
+# Quick Start
+
+The function to calculate the sample size is `calculate_mrt_bin_samplesize_f()`.
+The function to calculate the sample size is `calculate_mrt_bin_power_f()`.
+Because the syntax for their use are similar, here we illustrate the use of
+`calculate_mrt_bin_samplesize_f()`.
+
+The function `calculate_mrt_bin_samplesize_f()` takes in the following arguments:
+
+- `avail_pattern`: A vector of length $m$. The $t$-th entry denotes the average availability
+at decision point $t$, $E(I_t)$.
+
+- `p_t`: A vector of length $m$. The $t$-th entry denotes the randomization probability
+at decision point $t$, $P(A_t = 1)$. 
+
+- `f_t` and `beta`: They characterize the MEE under the target alternative $H_1^{\text{target}}$, where `f_t` is a matrix of size $m \times p$, and `beta` is a vector of length $p$, and $p$ is the degrees of freedom for the MEE under alternative. Specifically, under $H_1^{\text{target}}$, $\text{MEE}(t)$ equals `f_t[t, ] %*% beta` for each $1 \leq t \leq m$. Usually the first column of `f_t` is a column of 1's.
+
+- `g_t` and `alpha`: They characterize the success probability null curve $E(Y_{t+1} \mid A_t = 0, I_t = 1)$ for $1 \leq t \leq m$, where `g_t` is a matrix of size $m \times q$ and `alpha` is a vector of length $q$, and $q$ is the degrees of freedom for the success probability null curve. Specifically, $E(Y_{t+1} \mid A_t = 0, I_t = 1)$ equals `g_t[t, ] %*% alpha` for each $1 \leq t \leq m$. Usually the first column of `g_t` is a column of 1's. In addition, it is required that the linear column span of `g_t` contains `f_t[, j] * p_t` for each $1 \leq j \leq p$ for the sample size calculation result to be accurate; `calculate_mrt_bin_samplesize_f()` checks for this and if not satisfied the function will output a warning.
+
+- `gamma`: A scalar. This is the desired type I error.
+
+- `b`: A scalar. This is the desired type II error. In other words, $1-b$ is the desired power.
+
+- `exact`: A boolean value, default to `FALSE`. If `TRUE`, outputs the resulting sample size with decimal digits. If `FALSE`, outputs the resulting sample size after talking the ceiling (smallest integer that is larger than or equal to the calculated sample size).
+
+
+
+## A numerical example
+
+We use the following numerical example to illustrate 4 functions in this package:
+`calculate_mrt_bin_samplesize_f()`, `calculate_mrt_bin_power_f()`,
+`power_vs_n_plot()`, and `power_summary()`. In this numerical example,
+the total number of decision points $m = 10$. The degrees of freedom for
+the MEE and the success probability null curve are $p = 2$ and $q = 2$.
+
+
 ```{r setup}
 library(mrtbincalc)
 ```
 
-# Introduction 
-The **mrtbincalc** package provides a sample size calculator for
-micro-randomized trials (MRT) with binary outcomes. The sample size formula is
-developed in ["Sample Size Considerations for Micro-Randomized Trials with
-Binary Outcome"](https://sites.google.com/view/tianchen-qian/research) by E.
-Cohn, T. Qian, and S. Murphy. This calculator can provide the sample size needed
-for a specified power, and can also be used to find the power given a sample
-size in the context of an MRT.
-
-In an MRT, each participant is repeatedly randomized among multiple options of
-an intervention (no intervention is usually one of the options), usually
-hundreds or thousands of times throughout the trial. The prefix “micro” reflects
-the frequent randomization on each participant. After each of such times (called
-a decision point), a near-term, proximal outcome is measured, which is typically
-an outcome that the intervention is directly targeting. For example, in a study
-where the intervention is a push notification suggesting a near-term physical
-exercise, the proximal outcome is the step count in the subsequent 30 minutes
-@klasnja2020quality.
-
-
-# Quick Start
-This section provides examples of how to use this package. It allows the user to
-see the basic operations and what the outputs would look like. The functions in
-this package rely on the some specific information from the MRT set up, such as
-the number of decision time points over the course of the study, and the the
-probability of assigning the treatment at each decision time point (the
-randomization probability).
-
-Since in an MRT treatment can only be provided when an individual is available,
-we must account for this. The expected availability is the probability a person
-is available to receive the intervention at a specific decision time. To use
-this package, you need to define a time-varying pattern for the expected
-availability.
-
-Further pre-specified information that the user needs to provide is the success
-probability null curve at each decision time point. It is defined as the
-probability of the proximal outcome equal to 1 for available individuals who are
-not assigned treatment. The user needs to provide the trend of success
-probability of the null curve. For example, this could be either constant or
-linear over decision points.
-
-
-Finally, the proximal treatment effect at each decision time point is defined as
-the mean difference in the proximal outcome between available people who are
-assigned a treatment versus available people who are not assigned treatment. In
-this work, we only consider the binary treatment. One needs to provide the trend
-of proximal treatment effects.
-
-
-The computation of the required sample size/power relies on a test statistic
-that is distributed as a non-central $F$ with $p, n-q-p$ degrees of freedom
-under the alternative hypothesis. For specifics about this see @pan2002small.
- 
-
-The two main operations of this package are to find the sample size required for
-a specified power and to find the power for a specified sample size in the
-context of an MRT.
-
-## Data
-The following data is included in the package and will be used to illustrate
-some of the functions in this package:
- 
 
 `tau_t_1`: Vector of length 10 that holds the average availability at each time
 point. In this example the availability remains constant across decision points.
 ```{r}
 tau_t_1
 ```
-
-
-`f_t_1`: A 2 by 10 matrix defining the alternative hypothesis. In this example
-it is a log-linear trend. Each row corresponds to a decision point (in this
-example we have 10).
-```{r}
-f_t_1
-```
-
-
-`g_t_1`: A 2 by 10 matrix defining the null hypothesis.In this example it is a
-log-linear trend. As with `f_t_1`, each row corresponds to a decision point.
-```{r}
-g_t_1
-```
-
 
 `p_t_1`: A length 10 vector of randomization probabilities for each time point. 
 This example has the randomization probability staying constant across decision 
@@ -113,30 +121,37 @@ points.
 p_t_1
 ```
 
+`f_t_1`: A 10 by 2 matrix that defines the MEE under the target alternative hypothesis (together with `beta_1`). Each row corresponds to a decision point (in this example we have 10).
+```{r}
+f_t_1
+```
 
-`beta_1`: Vector that defines the alternative hypothesis.The matrix
-multiplication of this vector with f_t_1 defines the MEE under the alternative
-hypothesis.
+`beta_1`: Vector that defines the MEE under the target alternative hypothesis (together with `f_t_1`).
 ```{r}
 beta_1
 ```
 
+`g_t_1`: A 10 by 2 matrix that defines the success probability null curve (together with `alpha_1`).
+As with `f_t_1`, each row corresponds to a decision point.
+```{r}
+g_t_1
+```
 
-`alpha_1`: A length of 2 vector that defines the null hypothesis.The matrix
-multiplication of this vector with g_t_1 defines the MEE under the null
-hypothesis.
+`alpha_1`: A length of 2 vector that defines the success probability null curve (together with `g_t_1`).
 ```{r}
 alpha_1
 ```
 
-## Examples
-### `calculate_mrt_bin_samplesize_f()`
-Below we compute the required sample size for an MRT with the above data to
-achieve $0.8$ power. The argument `gamma` is the type I error rate, `b` is the
-type II error rate ($1-power$), and `exact` is a flag for if the function should
+
+### Example use of `calculate_mrt_bin_samplesize_f()`
+
+Below we compute the required sample size for an MRT to
+achieve $0.8$ power using the above numerical example.
+Recall that the argument `gamma` is the type I error rate, `b` is the
+type II error rate ($1- \text{power}$), and `exact` is a flag for if the function should
 return the exact sample size our calculator computes (this may not be an
 integer) or the ceiling of this number. By default `exact=FALSE`. We see that
-the required sample size is $275$ individuals for our setup.
+the required sample size is $275$ individuals for this numerical example.
 ```{r}
 calculate_mrt_bin_samplesize_f(avail_pattern=tau_t_1, 
                                f_t=f_t_1, g_t=g_t_1, 
@@ -147,14 +162,16 @@ calculate_mrt_bin_samplesize_f(avail_pattern=tau_t_1,
                                exact=FALSE)
 ```
 
-### `calculate_mrt_bin_power_f()`
-If the investigator would like to calculate power based on a fixed sample size
-that is feasible in the study, with a specified significance level, then they
+### Example use of `calculate_mrt_bin_power_f()`
+
+If the investigator would like to calculate power given a sample size
+and a specified significance level, then they
 can use the `calculate_mrt_bin_power_f()` function. The first seven arguments
 are the same as in `calculate_mrt_bin_samplesize_f()`. The final argument, `n`
-is the number of individuals. Notice how the sample size (`n=275`) is the output
-from the previous computation and the power is very close to $0.8$, there is a
-slight discrepancy due to the rounding up of the sample size in the previous
+is the sample size (i.e., number of individuals). Notice that, as expected,
+the sample size (`n=275`) is the output
+from the previous computation and the power is very close to $0.8$; it is not exactly 0.8 
+due to the rounding up of the sample size in the previous
 example.
 ```{r}
 calculate_mrt_bin_power_f(avail_pattern=tau_t_1, 
@@ -164,16 +181,13 @@ calculate_mrt_bin_power_f(avail_pattern=tau_t_1,
                           gamma=0.05, 
                           n=275)
 ```
-### `power_vs_n_plot()`
-Based on the fraction of power calculated above, the user can employ this
-information to trade off/make the decision on power vs. sample size. This
-decision can be costly, and so having a visualization of this relationship
-between power and sample size can be beneficial.
 
-Thus, the package provides a visualization of this relationship and so we
-recommend the user to use the `power_vs_n_plot()` function. This example uses
-the default range of sample sizes to plot over, but with the `min_n` and `max_n`
-the user can choose what range they want to plot over.
+### Example use of `power_vs_n_plot()`
+
+`power_vs_n_plot()` can be used to obtain a visualization of the relationship between the power and the 
+sample size for a range of possible power and sample size values. The following example uses
+the default range of sample sizes to plot over, but with the additional arguments `min_n` and `max_n`
+the user can choose what sample size range they want to plot over.
 
 ```{r powe-plot, fig.align='center'}
 power_vs_n_plot(avail_pattern=tau_t_1, 
@@ -183,15 +197,15 @@ power_vs_n_plot(avail_pattern=tau_t_1,
                 gamma=0.05)
 ```
 
-### `power_summary()`
-Another way to look at this information that quantifies power in relation to
-sample size, is by looking at a list of specific powers and the sample size
-needed to achieve it. This package offers a `power_summary()` function that
-considers sample sizes for power ranging from $0.6$ to $0.95$ by increments of
-$0.05$ by default. Again, we see that a sample size of $275$ will achieve a
-power of $0.8$ with these settings. If the user is interested in values not
-included in this range they can input any sequence of power levels in the
-`power_levels` argument.
+### Example use of `power_summary()`
+
+`power_summary()` provides a tabular way to examine the relationship between the power and the 
+sample size. The following example presents the sample size for power ranging from
+$0.6$ to $0.95$ by increments of $0.05$. Again, we see that a sample size of $275$ will achieve a
+power of $0.8$ in our numerical example. The user can customize the power range and increments by
+specifying the `power_levels` argument.
+
+
 ```{r}
 power_summary(tau_t_1, f_t_1, g_t_1,beta_1, alpha_1, p_t_1, 0.05)
 ```
