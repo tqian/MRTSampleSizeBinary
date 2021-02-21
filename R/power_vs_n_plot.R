@@ -26,15 +26,15 @@
 #' @examples            power_vs_n_plot(tau_t_1, f_t_1, g_t_1, beta_1, alpha_1,
 #'                         p_t_1, 0.05, 15, 700)
 power_vs_n_plot <- function(avail_pattern,
-                                     f_t,
-                                     g_t,
-                                     beta,
-                                     alpha,
-                                     p_t,
-                                     gamma,
-                                     min_n=max(min_samp(alpha, beta), 11),
-                                     max_n=max_samp(min_n)
-                                     )
+                            f_t,
+                            g_t,
+                            beta,
+                            alpha,
+                            p_t,
+                            gamma,
+                            min_n=max(min_samp(alpha, beta), 11),
+                            max_n=max_samp(min_n)
+)
 {
   
   if(min_n >= max_n) {
@@ -54,12 +54,12 @@ power_vs_n_plot <- function(avail_pattern,
   for (n_i in n_vec){
     indx <- which(n_vec == n_i)
     power_vec[indx] <- mrt_binary_power(avail_pattern, f_t, g_t, 
-                                                 beta, alpha, p_t, gamma,n_i)
- 
+                                        beta, alpha, p_t, gamma,n_i)
+    
   }
-
+  
   power_n_data <- data.frame(power_vec, n_vec)
-
+  
   
   ggplot(power_n_data)+
     geom_line(aes(y = power_vec, x = n_vec), color = "deepskyblue3")+
@@ -70,6 +70,6 @@ power_vs_n_plot <- function(avail_pattern,
           axis.title = element_text(size=14))
   
   
-
+  
 }
 

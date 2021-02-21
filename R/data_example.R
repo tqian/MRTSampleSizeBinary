@@ -10,7 +10,7 @@
 #' In this example it is a log-linear trend.
 #' }
 "f_t_1"
-   
+
 #' A matrix defining the success probability null curve.
 #' @format a 10 by 2 matrix
 #' \describe{

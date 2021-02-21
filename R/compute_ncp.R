@@ -37,9 +37,9 @@ compute_ncp <- function(x, beta, m_matrix, sigma_matrix){
   }
   
   return(as.numeric(x * t(beta) %*%
-               solve(solve(m_matrix) %*%
-                       sigma_matrix %*%
-                       t(solve(m_matrix))) %*% 
-               beta))
+                      solve(solve(m_matrix) %*%
+                              sigma_matrix %*%
+                              t(solve(m_matrix))) %*% 
+                      beta))
 }
 

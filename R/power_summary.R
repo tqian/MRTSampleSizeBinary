@@ -50,7 +50,7 @@ power_summary <- function(avail_pattern,
   
   suppressWarnings(
     ten_power <- mrt_binary_power(avail_pattern, f_t, g_t, beta, alpha, 
-                                         p_t, gamma, 10))
+                                  p_t, gamma, 10))
   # check power is within (0,1)
   if(max_power >=1 | min_power <= 0){
     stop("Power should be between 0 and 1")
@@ -59,8 +59,8 @@ power_summary <- function(avail_pattern,
   # make sure power is sufficiently large
   if(min_power <= ten_power) {
     warning(strwrap(paste0("The required sample size is <=10 to attain ", 
-                        min_power, 
-                        " power for this setting. See help(power_summary) for
+                           min_power, 
+                           " power for this setting. See help(power_summary) for
                         more details"), exdent=1))
   }
   
@@ -69,8 +69,8 @@ power_summary <- function(avail_pattern,
   
   for(r in 1:length(power_levels)){
     power_size[r,2] <-  mrt_binary_ss(avail_pattern, f_t, g_t, 
-                                                        beta, alpha, p_t, gamma, 
-                                                        1-power_levels[r])
+                                      beta, alpha, p_t, gamma, 
+                                      1-power_levels[r])
   }
   
   return(power_size)

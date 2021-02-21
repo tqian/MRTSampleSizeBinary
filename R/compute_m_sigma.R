@@ -100,7 +100,7 @@ compute_m_sigma <- function(avail_pattern,
     
     sigma_matrix <- sigma_matrix + this_sigma
     if(!("matrix" %in% class(this_sigma) & 
-                all(dim(this_sigma) == c(p, p)))){
+         all(dim(this_sigma) == c(p, p)))){
       stop("Incorrect dimensions for M matrix, or improper type.")
     }
   }

@@ -29,20 +29,20 @@
 #' @examples            mrt_binary_power(tau_t_1, f_t_1, g_t_1, beta_1,
 #'                                               alpha_1, p_t_1, 0.05, 100)
 mrt_binary_power <- function(avail_pattern,  
-                                      f_t,             
-                                      g_t,             
-                                      beta,            
-                                      alpha,           
-                                      p_t,             
-                                      gamma,          
-                                      n)               
+                             f_t,             
+                             g_t,             
+                             beta,            
+                             alpha,           
+                             p_t,             
+                             gamma,          
+                             n)               
 {
   pts <- length(avail_pattern)
   
   if(!(is.matrix(f_t)) | !(is.matrix(g_t))){
     stop("f_t and g_t should be matrices")
   }
-
+  
   dim_vec <- c(dim(f_t)[1], dim(g_t)[1], length(p_t))
   
   if(!all(dim_vec == pts)){
@@ -83,7 +83,7 @@ mrt_binary_power <- function(avail_pattern,
   if(n <= 10) {
     warning("n <= 10 may result in inaccurate power calculation, because the sample size formula is based on an asymptotic result.")
   }
-
+  
   # check that f_t is of full column rank
   if(!is_full_column_rank(f_t)) {
     stop("f_t has linearly dependent columns.")

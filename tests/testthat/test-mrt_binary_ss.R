@@ -75,7 +75,7 @@ test_that(
   {
     expect_equal(
       mrt_binary_ss(tau_t, f_t, g_t, beta, 
-                                     alpha, p_t, gamma, b, TRUE),
+                    alpha, p_t, gamma, b, TRUE),
       274.0055127)
   }
 )
@@ -85,7 +85,7 @@ test_that(
   {
     expect_equal(
       mrt_binary_ss(tau_t, f_t, g_t, beta, 
-                                     alpha, p_t, gamma, b, FALSE),
+                    alpha, p_t, gamma, b, FALSE),
       275)
   }
 )
@@ -96,7 +96,7 @@ test_that(
   {
     expect_equal(
       mrt_binary_ss(tau_t, f_new, g_new, beta_new, 
-                                     alpha_new, p_t, gamma, b, TRUE),
+                    alpha_new, p_t, gamma, b, TRUE),
       32.003286527546599)
   }
 )
@@ -106,7 +106,7 @@ test_that(
   {
     expect_equal(
       mrt_binary_ss(tau_t, f_t, g_new, beta, 
-                                     alpha_new, p_t, gamma, b, TRUE),
+                    alpha_new, p_t, gamma, b, TRUE),
       184.43823325060882)
   }
 )
@@ -116,10 +116,10 @@ test_that(
   {
     expect_equal(
       mrt_binary_ss(tau_t, f_t, g_new, beta, 
-                                     alpha_new, p_t, gamma,
-                                     1-mrt_binary_power(
-                                       tau_t, f_t, g_new, beta,
-                                       alpha_new, p_t, gamma, 50), TRUE),
+                    alpha_new, p_t, gamma,
+                    1-mrt_binary_power(
+                      tau_t, f_t, g_new, beta,
+                      alpha_new, p_t, gamma, 50), TRUE),
       50)
   }
 )
@@ -130,7 +130,7 @@ test_that(
   {
     expect_warning(
       mrt_binary_ss(tau_t, f_new, g_t, beta_new, 
-                                     alpha, p_t, gamma, b, TRUE))
+                    alpha, p_t, gamma, b, TRUE))
   }
 )
 
@@ -141,7 +141,7 @@ test_that(
   {
     expect_warning(
       mrt_binary_ss(tau_t, f_warn, g_t, beta, 
-                                alpha, p_t, gamma, 0.4))
+                    alpha, p_t, gamma, 0.4))
   }
 )
 # test errors
@@ -150,7 +150,7 @@ test_that(
   {
     expect_error(
       mrt_binary_ss(tau_t, f_t, g_t, beta_new, 
-                                     alpha, p_t, gamma, b, TRUE),
+                    alpha, p_t, gamma, b, TRUE),
       "Dimensions of f_t and beta do not agree.")
   }
 )
@@ -161,7 +161,7 @@ test_that(
   {
     expect_error(
       mrt_binary_ss(tau_t, f_t, g_t, beta, 
-                                     alpha_new, p_t, gamma, b, TRUE),
+                    alpha_new, p_t, gamma, b, TRUE),
       "Dimensions of g_t and alpha do not agree.")
   }
 )
@@ -171,7 +171,7 @@ test_that(
   {
     expect_error(
       mrt_binary_ss(rep(.4, times=2), f_t, g_t, beta, 
-                                     alpha_new, p_t, gamma, b, TRUE),
+                    alpha_new, p_t, gamma, b, TRUE),
       "All arguments must agree on number of time points.")
   }
 )
@@ -181,7 +181,7 @@ test_that(
   {
     expect_error(
       mrt_binary_ss(tau_t, f_t, g_t, beta, 
-                                     alpha, p_t, -3, b, TRUE),
+                    alpha, p_t, -3, b, TRUE),
       "gamma, type I error, should be between 0 and 1")
   }
 )
@@ -191,7 +191,7 @@ test_that(
   {
     expect_error(
       mrt_binary_ss(tau_t, f_t, g_t, beta, 
-                                     alpha, p_t, gamma, 100*b, TRUE),
+                    alpha, p_t, gamma, 100*b, TRUE),
       "b, type II error, should be between 0 and 1")
   }
 )
@@ -201,7 +201,7 @@ test_that(
   {
     expect_error(
       mrt_binary_ss(tau_t, c(1,3,0), g_t, beta, 
-                                     alpha, p_t, gamma, 100*b, TRUE),
+                    alpha, p_t, gamma, 100*b, TRUE),
       "f_t and g_t should be matrices")
   }
 )
@@ -211,7 +211,7 @@ test_that(
   {
     expect_error(
       mrt_binary_ss(tau_t, f_t, 0, beta, 
-                                     alpha, p_t, gamma, 100*b, TRUE),
+                    alpha, p_t, gamma, 100*b, TRUE),
       "f_t and g_t should be matrices")
   }
 )
