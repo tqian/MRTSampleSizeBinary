@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 # Background 
-The **mrtbincalc** package provides a sample size calculator for
+The **MRTSampleSizeBinary** package provides a sample size calculator for
 micro-randomized trials (MRT) where the proximal outcomes are binary. 
 This calculator can be used to either 
 
@@ -104,7 +104,7 @@ the MEE and the success probability null curve are $p = 2$ and $q = 2$.
 
 
 ```{r setup}
-library(mrtbincalc)
+library(MRTSampleSizeBinary)
 ```
 
 
