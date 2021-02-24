@@ -2,11 +2,8 @@ Package: MRTSampleSizeBinary
 Type: Package
 Title: Power and Sample Size Calculator for MRT
 Version: 0.1.0
-Author@R: c(
-	person("Eliot", "Wong-Toi", , role = "aut"),
-	person("Thabat", "Dahdoul", , role = "aut"),
-	person("Tianchen", "Qian", , "t.qian@uci.edu", c("aut", "cre"))
-	)
+Author: Eliot Wong-Toi, Thabat Dahdoul, Tianchen Qian
+Maintainer: Tianchen Qian <tiancq1@uci.edu>
 Description: Power and sample size calculator for micro-randomized trials with binary outcomes.
 License: GPL-3
 Encoding: UTF-8
