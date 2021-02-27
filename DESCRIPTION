@@ -1,10 +1,10 @@
 Package: MRTSampleSizeBinary
 Type: Package
-Title: Power and Sample Size Calculator for MRT
+Title: Sample Size and Power Calculator for Micro-Randomized Trials with Binary Outcomes
 Version: 0.1.0
 Author: Eliot Wong-Toi, Thabat Dahdoul, Tianchen Qian
-Maintainer: Tianchen Qian <tiancq1@uci.edu>
-Description: Power and sample size calculator for micro-randomized trials with binary outcomes.
+Maintainer: Tianchen Qian <t.qian@uci.edu>
+Description: Sample size and power calculator for micro-randomized trials with binary outcomes.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
