@@ -13,7 +13,8 @@ mrt_binary_ss(
   p_t,
   gamma,
   b,
-  exact = FALSE
+  exact = FALSE,
+  less_than_10_possible = FALSE
 )
 }
 \arguments{
@@ -40,6 +41,10 @@ time point.}
 \item{b}{Desired Type II error}
 
 \item{exact}{Determines if exact n or ceiling will be returned}
+
+\item{less_than_10_possible}{If TRUE, returns sample size (instead of error)
+even if the calculated sample size is <= 10. Setting to TRUE is not recommended. 
+Defaults to FALSE.}
 }
 \value{
 Sample size to achieve desired power.
