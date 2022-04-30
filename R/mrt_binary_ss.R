@@ -32,6 +32,9 @@
 #' @param gamma         Desired Type I error
 #' @param b             Desired Type II error
 #' @param exact         Determines if exact n or ceiling will be returned
+#' @param less_than_10_possible         If TRUE, returns sample size (instead of error)
+#'   even if the calculated sample size is <= 10. Setting to TRUE is not recommended. 
+#'   Defaults to FALSE.
 #'
 #' @return              Sample size to achieve desired power.
 #' @importFrom          stats uniroot qf pf
@@ -48,7 +51,8 @@ mrt_binary_ss <- function(avail_pattern,
                           p_t,             
                           gamma,          
                           b,
-                          exact=FALSE)               
+                          exact=FALSE,
+                          less_than_10_possible=FALSE)               
 {
   pts <- length(avail_pattern)
   
@@ -126,11 +130,13 @@ mrt_binary_ss <- function(avail_pattern,
     ten_power <- mrt_binary_power(avail_pattern, f_t, g_t, beta, alpha, 
                                   p_t, gamma, 10))
   
-  if(1-b <= ten_power) {
-    stop(strwrap(paste0("The required sample size is <=10 to attain ", 
-                        1-b, 
-                        " power for this setting. See help(mrt_binary_ss) for
+  if (!less_than_10_possible) {
+    if(1-b <= ten_power) {
+      stop(strwrap(paste0("The required sample size is <=10 to attain ", 
+                          1-b, 
+                          " power for this setting. See help(mrt_binary_ss) for
                         more details"), exdent=1))
+    }
   }
   
   # Set up the function that we will ultimately solve to get the sample size
