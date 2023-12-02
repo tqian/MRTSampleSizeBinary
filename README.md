@@ -1,10 +1,7 @@
 # MRTSampleSizeBinary
+
 This package provides a sample size calculator for Micro-randomized Trials with
-binary outcomes. The sample size formula is developed in ["Sample Size
-Considerations for Micro-Randomized Trials with Binary
-Outcome"](https://sites.google.com/view/tianchen-qian/research) by E. Cohn, T.
-Qian, and S. Murphy. This is currently a work in progress; contact Tianchen Qian
-(qiantianchen.thu@gmail.com) if you would like a copy of the draft manuscript.
+binary outcomes, based on the following article. Cohn, E. R., Qian, T., & Murphy, S. A. (2023). Sample size considerations for micro‐randomized trials with binary proximal outcomes. Statistics in Medicine.
 
 Before using the calculator the user should have knowledge of the following:
 
