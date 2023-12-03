@@ -4,7 +4,7 @@ Title: Sample Size Calculator for MRT with Binary Outcomes
 Version: 0.1.2
 Author: Eliot Wong-Toi, Thabat Dahdoul, Tianchen Qian
 Maintainer: Tianchen Qian <t.qian@uci.edu>
-Description: Provides a sample size calculator for micro-randomized trials (MRTs) with binary outcomes based on Cohn et al. (2023) <https://doi.org/10.1002/sim.9748>. Also provides a power calculator when the sample size is input by the user.
+Description: Provides a sample size calculator for micro-randomized trials (MRTs) with binary outcomes based on Cohn et al. (2023) <doi:10.1002/sim.9748>. Also provides a power calculator when the sample size is input by the user.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
